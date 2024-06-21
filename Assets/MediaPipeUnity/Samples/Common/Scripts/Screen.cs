@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -62,16 +56,12 @@ namespace Mediapipe.Unity
 
       if (_imageSource.isVerticallyFlipped && runningMode == RunningMode.Async)
       {
-        // In Async mode, we don't need to flip the screen vertically since the image will be copied on CPU.
         rect = FlipVertically(rect);
       }
 
       if (_imageSource.isFrontFacing)
       {
-        // Flip the image (not the screen) horizontally.
-        // It should be taken into account that the image will be rotated later.
         var rotation = _imageSource.rotation;
-
         if (rotation == RotationAngle.Rotation0 || rotation == RotationAngle.Rotation180)
         {
           rect = FlipHorizontally(rect);

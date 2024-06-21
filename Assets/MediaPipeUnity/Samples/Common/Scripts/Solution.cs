@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System.Collections;
 using UnityEngine;
 
@@ -16,7 +10,6 @@ namespace Mediapipe.Unity.Sample
     [SerializeField] private GameObject _bootstrapPrefab;
 
 #pragma warning disable IDE1006
-    // TODO: make it static
     protected virtual string TAG => GetType().Name;
 #pragma warning restore IDE1006
 
@@ -31,34 +24,21 @@ namespace Mediapipe.Unity.Sample
       Play();
     }
 
-    /// <summary>
-    ///   Start the main program from the beginning.
-    /// </summary>
     public virtual void Play()
     {
       isPaused = false;
     }
 
-    /// <summary>
-    ///   Pause the main program.
-    /// <summary>
     public virtual void Pause()
     {
       isPaused = true;
     }
 
-    /// <summary>
-    ///    Resume the main program.
-    ///    If the main program has not begun, it'll do nothing.
-    /// </summary>
     public virtual void Resume()
     {
       isPaused = false;
     }
 
-    /// <summary>
-    ///   Stops the main program.
-    /// </summary>
     public virtual void Stop()
     {
       isPaused = true;
@@ -74,8 +54,6 @@ namespace Mediapipe.Unity.Sample
     {
       var sourceTexture = imageSource.GetCurrentTexture();
 
-      // For some reason, when the image is coiped on GPU, latency tends to be high.
-      // So even when OpenGL ES is available, use CPU to copy images.
       var textureType = sourceTexture.GetType();
 
       if (textureType == typeof(WebCamTexture))

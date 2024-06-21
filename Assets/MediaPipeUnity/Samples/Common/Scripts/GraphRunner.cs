@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +24,6 @@ namespace Mediapipe.Unity.Sample
     }
 
 #pragma warning disable IDE1006
-    // TODO: make it static
     protected string TAG => GetType().Name;
 #pragma warning restore IDE1006
 
@@ -373,14 +366,6 @@ namespace Mediapipe.Unity.Sample
     {
       calculatorGraph = new CalculatorGraph();
       _NameTable.Add(calculatorGraph.mpPtr, GetInstanceID());
-
-      // NOTE: There's a simpler way to initialize CalculatorGraph.
-      //
-      //     calculatorGraph = new CalculatorGraph(config.text);
-      //
-      //   However, if the config format is invalid, this code does not initialize CalculatorGraph and does not throw exceptions either.
-      //   The problem is that if you call ObserveStreamOutput in this state, the program will crash.
-      //   The following code is not very efficient, but it will return Non-OK status when an invalid configuration is given.
       var baseConfig = textConfig == null ? null : CalculatorGraphConfig.Parser.ParseFromTextFormat(textConfig.text);
       if (baseConfig == null)
       {

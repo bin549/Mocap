@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System.Collections;
 using UnityEngine;
 
@@ -74,7 +68,6 @@ namespace Mediapipe.Unity.Sample
       {
         Debug.Log("Initializing GPU resources...");
         yield return GpuManager.Initialize();
-
         if (!GpuManager.IsInitialized)
         {
           Debug.LogWarning("If your native library is built for CPU, change 'Preferable Inference Mode' to CPU from the Inspector Window for AppSettings");
@@ -104,12 +97,10 @@ namespace Mediapipe.Unity.Sample
     private void OnApplicationQuit()
     {
       GpuManager.Shutdown();
-
       if (_isGlogInitialized)
       {
         Glog.Shutdown();
       }
-
       Protobuf.ResetLogHandler();
     }
   }
