@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System;
 using System.Collections;
 using UnityEngine;
@@ -49,18 +43,11 @@ namespace Mediapipe.Unity
 
     public ResolutionStruct resolution { get; protected set; }
 
-    /// <remarks>
-    ///   To call this method, the image source must be prepared.
-    /// </remarks>
-    /// <returns>
-    ///   <see cref="TextureFormat" /> that is compatible with the current texture.
-    /// </returns>
+
     public TextureFormat textureFormat => isPrepared ? TextureFormatFor(GetCurrentTexture()) : throw new InvalidOperationException("ImageSource is not prepared");
     public virtual int textureWidth => resolution.width;
     public virtual int textureHeight => resolution.height;
-    /// <remarks>
-    ///   If <see cref="type" /> does not support frame rate, it returns zero.
-    /// </remarks>
+
     public virtual double frameRate => resolution.frameRate;
     public float focalLengthPx { get; } = 2.0f; // TODO: calculate at runtime
     public virtual bool isHorizontallyFlipped { get; set; } = false;

@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,24 +19,17 @@ namespace Mediapipe.Unity
     private const string _TAG = nameof(TextureFrame);
 
     private static readonly GlobalInstanceTable<Guid, TextureFrame> _InstanceTable = new GlobalInstanceTable<Guid, TextureFrame>(100);
-    /// <summary>
-    ///   A dictionary to look up which native texture belongs to which <see cref="TextureFrame" />.
-    /// </summary>
-    /// <remarks>
-    ///   Not all the <see cref="TextureFrame" /> instances are registered.
-    ///   Texture names are queried only when necessary, and the corresponding data will be saved then.
-    /// </remarks>
+
     private static readonly Dictionary<uint, Guid> _NameTable = new Dictionary<uint, Guid>();
 
     private readonly Texture2D _texture;
     private IntPtr _nativeTexturePtr = IntPtr.Zero;
     private GlSyncPoint _glSyncToken;
 
-    // Buffers that will be used to copy texture data on CPU.
-    // They won't be initialized until it's necessary.
+
     private Texture2D _textureBuffer;
 
-    private Color32[] _pixelsBuffer; // for WebCamTexture
+    private Color32[] _pixelsBuffer; 
     private Color32[] pixelsBuffer
     {
       get
