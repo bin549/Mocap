@@ -42,14 +42,6 @@ namespace Mediapipe.Unity.Sample
       new ImageSource.ResolutionStruct(1920, 1080, 30),
     };
 
-    [Header("Static Image Source")]
-    [SerializeField] private Texture[] _availableStaticImageSources;
-    [SerializeField] private ImageSource.ResolutionStruct[] _defaultAvailableStaticImageResolutions = new ImageSource.ResolutionStruct[] {
-      new ImageSource.ResolutionStruct(512, 512, 0),
-      new ImageSource.ResolutionStruct(640, 480, 0),
-      new ImageSource.ResolutionStruct(1280, 720, 0),
-    };
-
     [Header("Video Source")]
     [SerializeField] private VideoClip[] _availableVideoSources;
 
@@ -69,11 +61,6 @@ namespace Mediapipe.Unity.Sample
     public WebCamSource BuildWebCamSource() => new WebCamSource(
       _preferredDefaultWebCamWidth,
       _defaultAvailableWebCamResolutions
-    );
-
-    public StaticImageSource BuildStaticImageSource() => new StaticImageSource(
-      _availableStaticImageSources,
-      _defaultAvailableStaticImageResolutions
     );
 
     public VideoSource BuildVideoSource() => new VideoSource(_availableVideoSources);
