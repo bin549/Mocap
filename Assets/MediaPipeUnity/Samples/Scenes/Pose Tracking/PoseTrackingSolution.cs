@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using Mediapipe.Unity;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
 {
   public class PoseTrackingSolution : ImageSourceSolution<PoseTrackingGraph>
   {
     [SerializeField] private PoseLandmarkListAnnotationController _poseLandmarksAnnotationController;
+    [SerializeField] private Mediapipe2UnitySkeletonController _mediapipe2UnitySkeletonController;
 
     public PoseTrackingGraph.ModelComplexity modelComplexity
     {
@@ -54,8 +56,7 @@ namespace Mediapipe.Unity.Sample.PoseTracking
       {
         graphRunner.OnPoseDetectionOutput += OnPoseDetectionOutput;
         graphRunner.OnPoseLandmarksOutput += OnPoseLandmarksOutput;
-        graphRunner.OnSegmentationMaskOutput += OnSegmentationMaskOutput;
-        graphRunner.OnRoiFromLandmarksOutput += OnRoiFromLandmarksOutput;
+        graphRunner.OnPoseWorldLandmarksOutput += OnPoseWorldLandmarksOutput;
       }
 
       var imageSource = ImageSourceProvider.ImageSource;
@@ -89,17 +90,11 @@ namespace Mediapipe.Unity.Sample.PoseTracking
       _poseLandmarksAnnotationController.DrawLater(value);
     }
 
-    private void OnSegmentationMaskOutput(object stream, OutputStream<ImageFrame>.OutputEventArgs eventArgs)
+    private void OnPoseWorldLandmarksOutput(object stream, OutputStream<LandmarkList>.OutputEventArgs eventArgs)
     {
       var packet = eventArgs.packet;
-      var value = packet == null ? default : packet.Get();
-      value?.Dispose();
-    }
-
-    private void OnRoiFromLandmarksOutput(object stream, OutputStream<NormalizedRect>.OutputEventArgs eventArgs)
-    {
-      var packet = eventArgs.packet;
-      var value = packet == null ? default : packet.Get(NormalizedRect.Parser);
+      var value = packet == null ? default : packet.Get(LandmarkList.Parser);
+      _mediapipe2UnitySkeletonController.Refresh(value);
     }
   }
 }
