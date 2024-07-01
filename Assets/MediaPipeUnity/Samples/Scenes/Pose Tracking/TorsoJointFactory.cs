@@ -18,13 +18,11 @@ namespace Mediapipe.Unity.Sample.PoseTracking
             );
         }
 
-        public HashSet<HumanJointCalculator> Generate ()
+        public HashSet<HumanJointCalculator> Generate()
         {
             HashSet<HumanJointCalculator> calculators = new HashSet<HumanJointCalculator>();
-
             calculators.Add(hipCalculator);
             calculators.Add(spineCalculator);
-
             return calculators;
         }
     }

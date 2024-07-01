@@ -7,16 +7,18 @@ namespace Mediapipe.Unity.Sample.PoseTracking
         public Transform obj;
         public LandmarkList _landmarkList;
 
-        public HumanJointCalculator (Transform t)
+        public HumanJointCalculator(Transform t)
         {
             obj = t;
         }
-        
-        public void Refresh (LandmarkList landmarkList) 
+
+        public void Refresh(LandmarkList landmarkList)
         {
             _landmarkList = landmarkList;
         }
-        
-        public virtual void Calc () {}
+
+        public virtual void Calc()
+        {
+        }
     }
 };

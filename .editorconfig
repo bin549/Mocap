@@ -11,15 +11,15 @@ indent_style = tab
 
 # XML Project Files
 [*.csproj]
-indent_size = 2
+indent_size = 4
 
 # XML Configuration Files
 [*.{xml,config,ruleset}]
-indent_size = 2
+indent_size = 4
 
 # JSON Files
 [*.json]
-indent_size = 2
+indent_size = 4
 
 # Dockerfile
 [Dockerfile*]
@@ -31,7 +31,7 @@ indent_size = 4
 
 # Source Files
 [*.{bzl,cpp,cs,h,py}]
-indent_size = 2
+indent_size = 4
 
 [*.cs]
 # Default Severity

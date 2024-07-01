@@ -9,10 +9,11 @@ namespace Mediapipe.Unity.Sample.PoseTracking
 
         public override void Calc () 
         {
-            if (_landmarkList == null) return;
-
+            if (_landmarkList == null)
+            {
+                return;
+            }
             Refresh();
-
             obj.Rotate(
                 Quaternion.FromToRotation(-obj.right, v_shoulder_elbow).eulerAngles,
                 Space.World

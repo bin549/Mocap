@@ -1,17 +1,17 @@
 namespace Mediapipe.Unity
 {
-  [System.Serializable]
-  public enum RunningMode
-  {
-    Async,
-    Sync,
-  }
-
-  public static class RunningModeExtension
-  {
-    public static bool IsSynchronous(this RunningMode runningMode)
+    [System.Serializable]
+    public enum RunningMode
     {
-      return runningMode == RunningMode.Sync;
+        Async,
+        Sync,
     }
-  }
+
+    public static class RunningModeExtension
+    {
+        public static bool IsSynchronous(this RunningMode runningMode)
+        {
+            return runningMode == RunningMode.Sync;
+        }
+    }
 }

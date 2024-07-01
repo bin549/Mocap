@@ -9,7 +9,7 @@ namespace Mediapipe.Unity.Sample.PoseTracking
         LimbsJointFactory limbsJointFactory;
         HeadJointFactory headJointFactory;
 
-        public HumanJointFactory (Animator anim)
+        public HumanJointFactory(Animator anim)
         {
             torsoJointFactory = new TorsoJointFactory(anim);
             limbsJointFactory = new LimbsJointFactory(anim);
@@ -22,11 +22,9 @@ namespace Mediapipe.Unity.Sample.PoseTracking
             HashSet<HumanJointCalculator> torsoCalculators = torsoJointFactory.Generate();
             HashSet<HumanJointCalculator> limbJointCalculators = limbsJointFactory.Generate();
             HashSet<HumanJointCalculator> headJointCalculators = headJointFactory.Generate();
-           
             calculators.UnionWith(torsoCalculators);
             calculators.UnionWith(limbJointCalculators);
             calculators.UnionWith(headJointCalculators);
-
             return calculators;
         }
     }

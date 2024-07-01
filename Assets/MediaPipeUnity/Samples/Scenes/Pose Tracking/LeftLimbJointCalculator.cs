@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
 {
-    public class LeftLimbJointCalculator: LimbJointCalculator
+    public class LeftLimbJointCalculator : LimbJointCalculator
     {
-        public LeftLimbJointCalculator (Transform t) : base(t) {}
+        public LeftLimbJointCalculator(Transform t) : base(t)
+        {
+        }
 
-        public override void Refresh ()
+        public override void Refresh()
         {
             if (_landmarkList == null) return;
 
@@ -72,6 +74,8 @@ namespace Mediapipe.Unity.Sample.PoseTracking
             );
         }
 
-        public override void Calc () {}
+        public override void Calc()
+        {
+        }
     }
 };

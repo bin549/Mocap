@@ -2,13 +2,18 @@ using UnityEngine;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
 {
-    public class RightAnkleCalculator: RightLimbJointCalculator
-    {   
-        public RightAnkleCalculator (Transform t) : base(t) {}
-
-        public override void Calc () 
+    public class RightAnkleCalculator : RightLimbJointCalculator
+    {
+        public RightAnkleCalculator(Transform t) : base(t)
         {
-            if (_landmarkList == null) return;
+        }
+
+        public override void Calc()
+        {
+            if (_landmarkList == null)
+            {
+                return;
+            }
 
             Refresh();
 

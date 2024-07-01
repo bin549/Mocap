@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
 {
-    public class LimbJointCalculator: HumanJointCalculator
+    public class LimbJointCalculator : HumanJointCalculator
     {
         public Vector3 v_hip_shoulder;
         public Vector3 v_shoulder_elbow;
@@ -16,10 +16,16 @@ namespace Mediapipe.Unity.Sample.PoseTracking
         public Vector3 v_ankle_heel;
         public Vector3 v_ankle_index;
 
-        public LimbJointCalculator (Transform t) : base(t) {}
-        
-        public virtual void Refresh () {}
+        public LimbJointCalculator(Transform t) : base(t)
+        {
+        }
 
-        public override void Calc () {}
+        public virtual void Refresh()
+        {
+        }
+
+        public override void Calc()
+        {
+        }
     }
 };

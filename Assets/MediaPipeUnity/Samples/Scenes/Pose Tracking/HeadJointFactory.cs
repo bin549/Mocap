@@ -3,22 +3,21 @@ using System.Collections.Generic;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
 {
-    public class HeadJointFactory 
+    public class HeadJointFactory
     {
         NeckJointCalculator neckJointCalculator;
 
-        public HeadJointFactory (Animator anim)
+        public HeadJointFactory(Animator anim)
         {
             neckJointCalculator = new NeckJointCalculator(
                 anim.GetBoneTransform(HumanBodyBones.Neck)
             );
         }
 
-        public HashSet<HumanJointCalculator> Generate ()
+        public HashSet<HumanJointCalculator> Generate()
         {
             HashSet<HumanJointCalculator> calculators = new HashSet<HumanJointCalculator>();
             calculators.Add(neckJointCalculator);
-
             return calculators;
         }
     }

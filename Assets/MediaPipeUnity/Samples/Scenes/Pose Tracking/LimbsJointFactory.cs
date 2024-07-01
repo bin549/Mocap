@@ -15,15 +15,13 @@ namespace Mediapipe.Unity.Sample.PoseTracking
             leftLimbsJointFactory = new LeftLimbsJointFactory(anim);
         }
 
-        public HashSet<HumanJointCalculator> Generate ()
+        public HashSet<HumanJointCalculator> Generate()
         {
             HashSet<HumanJointCalculator> calculators = new HashSet<HumanJointCalculator>();
             HashSet<HumanJointCalculator> rightLimbsJointCalculator = rightLimbsJointFactory.Generate();
             HashSet<HumanJointCalculator> leftLimbsJointCalculator = leftLimbsJointFactory.Generate();
-
             calculators.UnionWith(rightLimbsJointCalculator);
             calculators.UnionWith(leftLimbsJointCalculator);
-
             return calculators;
         }
     }

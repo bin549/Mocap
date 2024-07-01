@@ -139,17 +139,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100200, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00056648254
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81548554
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.11107969
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_LocalRotation.w
@@ -301,7 +305,7 @@ MonoBehaviour:
   textureFramePool: {fileID: 275874970}
   runningMode: 0
   _poseLandmarksAnnotationController: {fileID: 1889892131}
-  _mediapipe2UnitySkeletonController: {fileID: 244553204}
+  _mediapipe2UnitySkeletonController: {fileID: 456229401}
 --- !u!114 &275874970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +325,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1250650596}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f103899748329a345826dc656a03df38,
         type: 3}
@@ -383,6 +387,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f103899748329a345826dc656a03df38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f103899748329a345826dc656a03df38,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -416,6 +430,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f42897344d2471aad3a20c57914e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &456229403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f103899748329a345826dc656a03df38,
+    type: 3}
+  m_PrefabInstance: {fileID: 323461688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &638479256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250650596}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,14 +1041,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250650595}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 1.7894335, y: 0.81548554, z: -6.48892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 244553209}
+  - {fileID: 456229403}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1264297878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,13 +1135,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264297878}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: -2.45}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1514445398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1397,4 +1418,3 @@ SceneRoots:
   - {fileID: 275874967}
   - {fileID: 710506647}
   - {fileID: 1250650596}
-  - {fileID: 323461688}
