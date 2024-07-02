@@ -43,10 +43,7 @@ public class AppSettingsPanel : MonoBehaviour
             ifSavedFolder.text = appSettings.GetSavedFolderPath();
         });
 
-        hidePanelButton.onClick.AddListener(() =>
-        {
-            Fade();
-        });
+        hidePanelButton.onClick.AddListener(() => { Fade(); });
     }
 
     public void Fade()

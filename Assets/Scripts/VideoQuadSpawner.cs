@@ -26,12 +26,13 @@ public class VideoQuadSpawner : MonoBehaviour
                 SpawnVideoQuad(x, y);
             }
         }
+
         for (int i = 0; i < videos.Length; i++)
         {
-            videoQuads[i].SetupVideo(videos[i]); 
+            videoQuads[i].SetupVideo(videos[i]);
         }
     }
-    
+
     private void Update()
     {
         VideoSelected();
@@ -39,7 +40,9 @@ public class VideoQuadSpawner : MonoBehaviour
 
     public void SpawnVideoQuad(int x, int y)
     {
-        VideoQuad newVideoQuad = Instantiate(videoQuad, spawnPoint.position + new Vector3(80 * y, -66 * x, 0), Quaternion.identity) as VideoQuad;
+        VideoQuad newVideoQuad =
+            Instantiate(videoQuad, spawnPoint.position + new Vector3(80 * y, -66 * x, 0),
+                Quaternion.identity) as VideoQuad;
         newVideoQuad.transform.SetParent(transform);
         videoQuads.Add(newVideoQuad);
         newVideoQuad.gameObject.GetComponent<Renderer>().enabled = false;
@@ -54,13 +57,16 @@ public class VideoQuadSpawner : MonoBehaviour
                 videoQuad.UnSelected();
                 currentVideoQuadIndex--;
             }
+
             if (currentVideoQuadIndex == -1)
             {
                 currentVideoQuadIndex = videos.Length - 1;
             }
+
             videoQuad = videoQuads[currentVideoQuadIndex];
             videoQuad.Selected();
         }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             if (currentVideoQuadIndex != -1)
@@ -70,6 +76,7 @@ public class VideoQuadSpawner : MonoBehaviour
             videoQuad = videoQuads[currentVideoQuadIndex];
             videoQuad.Selected();
         }
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             if (videoQuad != null)

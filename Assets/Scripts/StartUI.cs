@@ -11,10 +11,7 @@ public class StartUI : MonoBehaviour
     {
         appSettingsPanel = GameObject.FindObjectOfType<AppSettingsPanel>();
         showPanelButton = GameObject.Find("ShowPanelButton").GetComponent<Button>();
-        showPanelButton.onClick.AddListener(() =>
-        {
-            ShowPanel();
-        });
+        showPanelButton.onClick.AddListener(() => { ShowPanel(); });
     }
 
     private void Start()
@@ -41,6 +38,7 @@ public class StartUI : MonoBehaviour
             {
                 appSettingsPanel.Fade();
             }
+
             isPanelActive = !isPanelActive;
         }
     }

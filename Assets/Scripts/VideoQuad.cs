@@ -41,7 +41,6 @@ public class VideoQuad : MonoBehaviour
             transform.position = originPos;
             isBackward = false;
         }
-
     }
 
     public void SetupVideo(string path)
@@ -64,6 +63,7 @@ public class VideoQuad : MonoBehaviour
         {
             videoTexture = new RenderTexture(1920, 1080, 24);
         }
+
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = videoTexture;
         videoPlayer.Prepare();

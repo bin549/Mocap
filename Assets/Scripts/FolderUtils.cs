@@ -25,7 +25,8 @@ public class FolderUtils : MonoBehaviour
         {
             path += p;
         }
-        return path; 
+
+        return path;
     }
 
     public static string[] GetFilterdFiles(string directory, string[] extensions)
@@ -34,6 +35,7 @@ public class FolderUtils : MonoBehaviour
         {
             directory = Environment.CurrentDirectory;
         }
+
         DirectoryInfo mydir = new DirectoryInfo(directory);
         FileInfo[] f = mydir.GetFiles();
         List<FileInfo> f2 = new List<FileInfo>();
@@ -54,8 +56,10 @@ public class FolderUtils : MonoBehaviour
         {
             f3.Add(file.ToString());
         }
+
         return f3.ToArray();
     }
+
     private static string GetDirectoryPath(string directory)
     {
         var directoryPath = Path.GetFullPath(directory);
@@ -63,10 +67,12 @@ public class FolderUtils : MonoBehaviour
         {
             directoryPath += "\\";
         }
+
         if (Path.GetPathRoot(directoryPath) == directoryPath)
         {
             return directory;
         }
+
         return Path.GetDirectoryName(directoryPath) + Path.DirectorySeparatorChar;
     }
 }

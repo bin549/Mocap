@@ -11,4 +11,3 @@ public class Quit : MonoBehaviour
 #endif
     }
 }
- 
