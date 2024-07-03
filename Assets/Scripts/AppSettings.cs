@@ -14,7 +14,7 @@ public class AppSettings : MonoBehaviour
     public VideoPlayer videoPlayer;
     public Avatar avatar;
     [SerializeField] private Animator avatarAnimator;
-
+    
     private void Awake()
     {
         if (_Instance != null)
@@ -22,11 +22,11 @@ public class AppSettings : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+    
         _Instance = this;
         DontDestroyOnLoad(this);
     }
-
+    
     private void Start()
     {
         videosFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Videos");
@@ -38,57 +38,57 @@ public class AppSettings : MonoBehaviour
             savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
         }
     }
-
+    
     public void SetVideoPlayer(VideoPlayer videoPlayer)
     {
         this.videoPlayer = videoPlayer;
     }
-
+    
     public VideoPlayer GetVideoPlayer()
     {
         if (videoPlayer != null)
         {
             return videoPlayer;
         }
-
+    
         return null;
     }
-
+    
     public void SetAvatar(Avatar avatar)
     {
         this.avatar = avatar;
     }
-
+    
     public Avatar GetAvatar()
     {
         if (avatar != null)
         {
             return avatar;
         }
-
+    
         return null;
     }
-
+    
     public Animator GetAvatarAnimator()
     {
         if (avatarAnimator != null)
         {
             return avatarAnimator;
         }
-
+    
         return null;
     }
-
+    
     public void SetAvatarAnimator(Animator avatarAnimator)
     {
         this.avatarAnimator = avatarAnimator;
     }
-
+    
     public string GetVideosFolderPath()
     {
         return videosFolderPath;
     }
-
+    
     public string[] GetModels()
     {
         string[] extensions = new string[]
@@ -97,7 +97,7 @@ public class AppSettings : MonoBehaviour
         };
         return FolderUtils.GetFilterdFiles(modelsFolderPath, extensions);
     }
-
+    
     public string[] GetVideos()
     {
         string[] extensions = new string[]
@@ -108,17 +108,17 @@ public class AppSettings : MonoBehaviour
         //SelectFolder();
         return FolderUtils.GetFilterdFiles(videosFolderPath, extensions);
     }
-
+    
     public string GetModelsFolderPath()
     {
         return modelsFolderPath;
     }
-
+    
     public string GetSavedFolderPath()
     {
         return savedFolderPath;
     }
-
+    
     public void SetVideosFolderPath()
     {
         var path = FolderUtils.SelectFolder();
@@ -127,7 +127,7 @@ public class AppSettings : MonoBehaviour
             videosFolderPath = path;
         }
     }
-
+    
     public void SetModelsFolderPath()
     {
         var path = FolderUtils.SelectFolder();
@@ -136,7 +136,7 @@ public class AppSettings : MonoBehaviour
             modelsFolderPath = path;
         }
     }
-
+    
     public void SetSavedFolderPath()
     {
         var path = FolderUtils.SelectFolder();

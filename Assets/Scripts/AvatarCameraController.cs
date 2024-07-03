@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(1)]
-public class CameraController : MonoBehaviour
+public class AvatarCameraController : MonoBehaviour
 {
-    public AppSettings appSettings;
-    public Avatar avatar;
+    public SkeletonAvatar avatar;
     public Transform avatarTransform;
     private Vector3 offsetPosition;
     private bool isRotating = false;
@@ -14,14 +12,8 @@ public class CameraController : MonoBehaviour
     public float scrollSpeed = 30;
     public float rotateSpeed = 30;
 
-    private void Awake()
-    {
-        appSettings = GameObject.FindObjectOfType<AppSettings>();
-    }
-
     private void Start()
     {
-        avatar = appSettings.GetAvatar();
         avatarTransform = avatar.gameObject.transform;
         transform.LookAt(avatarTransform.position);
         offsetPosition = transform.position - avatarTransform.position;
