@@ -8,12 +8,15 @@ public class AppSettings : MonoBehaviour
     private string modelsFolderPath;
     private string savedFolderPath;
     private static AppSettings _Instance;
-    public bool showSkeleton = false;
+    public bool isShowSkeleton = false;
     public bool isBVHRecorder = false;
-    public int isMaleModel = 1;
     public VideoPlayer videoPlayer;
     public Avatar avatar;
     [SerializeField] private Animator avatarAnimator;
+    public GameObject environmentPivot;
+    public GameObject avatarModelPivot;
+    public GameObject[] environments;
+    public GameObject[] avatarModels;
     
     private void Awake()
     {
@@ -29,6 +32,10 @@ public class AppSettings : MonoBehaviour
     
     private void Start()
     {
+        environments = environmentPivot.GetComponentsInChildren<GameObject>();
+        avatarModels = avatarModelPivot.GetComponentsInChildren<GameObject>();
+        
+        
         videosFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Videos");
         modelsFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Models");
         savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");

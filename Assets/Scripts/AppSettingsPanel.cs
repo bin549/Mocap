@@ -55,18 +55,4 @@ public class AppSettingsPanel : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-
-    private void OnEnable()
-    {
-        showSkeleton.isOn = appSettings.showSkeleton == true;
-        isMaleModel.isOn = appSettings.isMaleModel == 1;
-        Debug.Log(appSettings.isMaleModel);
-    }
-
-    private void OnDisable()
-    {
-        appSettings.showSkeleton = showSkeleton.isOn ? true : false;
-        appSettings.isMaleModel = isMaleModel.isOn ? 1 : 0;
-        Debug.Log(appSettings.showSkeleton);
-    }
 }
