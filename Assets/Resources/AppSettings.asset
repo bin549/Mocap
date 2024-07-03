@@ -52,4 +52,4 @@ MonoBehaviour:
     height: 1080
     frameRate: 30
   _availableVideoSources:
-  - {fileID: 32900000, guid: eab4328b126a343829bd30da4072c19a, type: 3}
+  - {fileID: 32900000, guid: 747690f33e8ae487297a9bb94209de7f, type: 3}

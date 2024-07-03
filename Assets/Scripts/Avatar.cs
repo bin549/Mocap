@@ -21,19 +21,18 @@ public class Avatar : MonoBehaviour
     private float prevTall = 224 * 0.75f;
     private float zScale = 1;
 
-    [SerializeField] private AppSettings appSettings;
 
     private void Awake()
     {
         skeleton = new GameObject("Skeleton");
         animator = this.GetComponent<Animator>();
-        appSettings = GameObject.FindObjectOfType<AppSettings>();
+        // appSettings = GameObject.FindObjectOfType<AppSettings>();
         Initialize();
     }
 
     private void Update()
     {
-        PoseUpdate();
+        // PoseUpdate();
     }
 
     public Animator GetAnimator()
@@ -48,7 +47,7 @@ public class Avatar : MonoBehaviour
 
     public void Initialize()
     {
-        showSkeleton = appSettings.showSkeleton;
+        // showSkeleton = appSettings.showSkeleton;
         jointPoints = new JointPoint[PositionIndex.Count.Int()];
         for (int i = 0; i < PositionIndex.Count.Int(); i++)
         {
@@ -180,61 +179,61 @@ public class Avatar : MonoBehaviour
             AddSkeleton(PositionIndex.LeftThighBend, PositionIndex.AbdomenUpper);
             AddSkeleton(PositionIndex.LeftThighBend, PositionIndex.RightThighBend);
         }
-
-        // Set inverse.
-        Vector3 forward = TriangleNormal(jointPoints[PositionIndex.Hip.Int()].transform.position,
-            jointPoints[PositionIndex.LeftThighBend.Int()].transform.position,
-            jointPoints[PositionIndex.RightThighBend.Int()].transform.position);
-        foreach (JointPoint jointPoint in jointPoints)
-        {
-            if (jointPoint.transform != null)
-            {
-                jointPoint.initRotation = jointPoint.transform.rotation;
-            }
-
-            if (jointPoint.child != null)
-            {
-                jointPoint.inverse = GetInverse(jointPoint, jointPoint.child, forward);
-                jointPoint.inverseRotation = jointPoint.inverse * jointPoint.initRotation;
-            }
-        }
-
-        JointPoint hip = jointPoints[PositionIndex.Hip.Int()];
-        initPosition = jointPoints[PositionIndex.Hip.Int()].transform.position;
-        hip.inverse = Quaternion.Inverse(Quaternion.LookRotation(forward));
-        hip.inverseRotation = hip.inverse * hip.initRotation;
-
-        // Head rotation.
-        JointPoint head = jointPoints[PositionIndex.Head.Int()];
-        head.initRotation = jointPoints[PositionIndex.Head.Int()].transform.rotation;
-        Vector3 gaze = jointPoints[PositionIndex.Nose.Int()].transform.position -
-                       jointPoints[PositionIndex.Head.Int()].transform.position;
-        head.inverse = Quaternion.Inverse(Quaternion.LookRotation(gaze));
-        head.inverseRotation = head.inverse * head.initRotation;
-
-        JointPoint lHand = jointPoints[PositionIndex.LeftHand.Int()];
-        Vector3 lf = TriangleNormal(lHand.pos3D, jointPoints[PositionIndex.LeftMid1.Int()].pos3D,
-            jointPoints[PositionIndex.LeftThumb2.Int()].pos3D);
-        lHand.initRotation = lHand.transform.rotation;
-        lHand.inverse = Quaternion.Inverse(Quaternion.LookRotation(
-            jointPoints[PositionIndex.LeftThumb2.Int()].transform.position -
-            jointPoints[PositionIndex.LeftMid1.Int()].transform.position, lf));
-        lHand.inverseRotation = lHand.inverse * lHand.initRotation;
-
-        JointPoint rHand = jointPoints[PositionIndex.RightHand.Int()];
-        Vector3 rf = TriangleNormal(rHand.pos3D, jointPoints[PositionIndex.RightThumb2.Int()].pos3D,
-            jointPoints[PositionIndex.RightMid1.Int()].pos3D);
-        rHand.initRotation = jointPoints[PositionIndex.RightHand.Int()].transform.rotation;
-        rHand.inverse = Quaternion.Inverse(Quaternion.LookRotation(
-            jointPoints[PositionIndex.RightThumb2.Int()].transform.position -
-            jointPoints[PositionIndex.RightMid1.Int()].transform.position, rf));
-        rHand.inverseRotation = rHand.inverse * rHand.initRotation;
-
-        jointPoints[PositionIndex.Hip.Int()].score3D = 1f;
-        jointPoints[PositionIndex.Neck.Int()].score3D = 1f;
-        jointPoints[PositionIndex.Nose.Int()].score3D = 1f;
-        jointPoints[PositionIndex.Head.Int()].score3D = 1f;
-        jointPoints[PositionIndex.Spine.Int()].score3D = 1f;
+        //
+        // // Set inverse.
+        // Vector3 forward = TriangleNormal(jointPoints[PositionIndex.Hip.Int()].transform.position,
+        //     jointPoints[PositionIndex.LeftThighBend.Int()].transform.position,
+        //     jointPoints[PositionIndex.RightThighBend.Int()].transform.position);
+        // foreach (JointPoint jointPoint in jointPoints)
+        // {
+        //     if (jointPoint.transform != null)
+        //     {
+        //         jointPoint.initRotation = jointPoint.transform.rotation;
+        //     }
+        //
+        //     if (jointPoint.child != null)
+        //     {
+        //         jointPoint.inverse = GetInverse(jointPoint, jointPoint.child, forward);
+        //         jointPoint.inverseRotation = jointPoint.inverse * jointPoint.initRotation;
+        //     }
+        // }
+        //
+        // JointPoint hip = jointPoints[PositionIndex.Hip.Int()];
+        // initPosition = jointPoints[PositionIndex.Hip.Int()].transform.position;
+        // hip.inverse = Quaternion.Inverse(Quaternion.LookRotation(forward));
+        // hip.inverseRotation = hip.inverse * hip.initRotation;
+        //
+        // // Head rotation.
+        // JointPoint head = jointPoints[PositionIndex.Head.Int()];
+        // head.initRotation = jointPoints[PositionIndex.Head.Int()].transform.rotation;
+        // Vector3 gaze = jointPoints[PositionIndex.Nose.Int()].transform.position -
+        //                jointPoints[PositionIndex.Head.Int()].transform.position;
+        // head.inverse = Quaternion.Inverse(Quaternion.LookRotation(gaze));
+        // head.inverseRotation = head.inverse * head.initRotation;
+        //
+        // JointPoint lHand = jointPoints[PositionIndex.LeftHand.Int()];
+        // Vector3 lf = TriangleNormal(lHand.pos3D, jointPoints[PositionIndex.LeftMid1.Int()].pos3D,
+        //     jointPoints[PositionIndex.LeftThumb2.Int()].pos3D);
+        // lHand.initRotation = lHand.transform.rotation;
+        // lHand.inverse = Quaternion.Inverse(Quaternion.LookRotation(
+        //     jointPoints[PositionIndex.LeftThumb2.Int()].transform.position -
+        //     jointPoints[PositionIndex.LeftMid1.Int()].transform.position, lf));
+        // lHand.inverseRotation = lHand.inverse * lHand.initRotation;
+        //
+        // JointPoint rHand = jointPoints[PositionIndex.RightHand.Int()];
+        // Vector3 rf = TriangleNormal(rHand.pos3D, jointPoints[PositionIndex.RightThumb2.Int()].pos3D,
+        //     jointPoints[PositionIndex.RightMid1.Int()].pos3D);
+        // rHand.initRotation = jointPoints[PositionIndex.RightHand.Int()].transform.rotation;
+        // rHand.inverse = Quaternion.Inverse(Quaternion.LookRotation(
+        //     jointPoints[PositionIndex.RightThumb2.Int()].transform.position -
+        //     jointPoints[PositionIndex.RightMid1.Int()].transform.position, rf));
+        // rHand.inverseRotation = rHand.inverse * rHand.initRotation;
+        //
+        // jointPoints[PositionIndex.Hip.Int()].score3D = 1f;
+        // jointPoints[PositionIndex.Neck.Int()].score3D = 1f;
+        // jointPoints[PositionIndex.Nose.Int()].score3D = 1f;
+        // jointPoints[PositionIndex.Head.Int()].score3D = 1f;
+        // jointPoints[PositionIndex.Spine.Int()].score3D = 1f;
     }
 
     public void PoseUpdate()
