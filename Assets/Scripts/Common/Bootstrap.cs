@@ -1,11 +1,73 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace Mediapipe.Unity.Sample
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private AppSettings _appSettings;
+        public enum AssetLoaderType
+        {
+            StreamingAssets,
+            AssetBundle,
+            Local,
+        }
+
+        [SerializeField] private ImageSourceType _defaultImageSource;
+        [SerializeField] private InferenceMode _preferableInferenceMode;
+        [SerializeField] private AssetLoaderType _assetLoaderType;
+        [SerializeField] private Logger.LogLevel _logLevel = Logger.LogLevel.Debug;
+
+        [Header("Glog settings")] private int _glogMinloglevel = Glog.Minloglevel;
+        private int _glogStderrthreshold = Glog.Stderrthreshold;
+        private int _glogV = Glog.V;
+
+        [Header("WebCam Source")]
+        [Tooltip("For the default resolution, the one whose width is closest to this value will be chosen")]
+        [SerializeField]
+        private int _preferredDefaultWebCamWidth = 1280;
+
+        [SerializeField] private ImageSource.ResolutionStruct[] _defaultAvailableWebCamResolutions =
+            new ImageSource.ResolutionStruct[]
+            {
+                new ImageSource.ResolutionStruct(176, 144, 30),
+                new ImageSource.ResolutionStruct(320, 240, 30),
+                new ImageSource.ResolutionStruct(424, 240, 30),
+                new ImageSource.ResolutionStruct(640, 360, 30),
+                new ImageSource.ResolutionStruct(640, 480, 30),
+                new ImageSource.ResolutionStruct(848, 480, 30),
+                new ImageSource.ResolutionStruct(960, 540, 30),
+                new ImageSource.ResolutionStruct(1280, 720, 30),
+                new ImageSource.ResolutionStruct(1600, 896, 30),
+                new ImageSource.ResolutionStruct(1920, 1080, 30),
+            };
+
+        [Header("Video Source")] [SerializeField]
+        private VideoClip[] _availableVideoSources;
+
+        public ImageSourceType defaultImageSource => _defaultImageSource;
+        public InferenceMode preferableInferenceMode => _preferableInferenceMode;
+        public AssetLoaderType assetLoaderType => _assetLoaderType;
+        public Logger.LogLevel logLevel => _logLevel;
+
+        public void ResetGlogFlags()
+        {
+            Glog.Logtostderr = true;
+            Glog.Minloglevel = _glogMinloglevel;
+            Glog.Stderrthreshold = _glogStderrthreshold;
+            Glog.V = _glogV;
+        }
+
+        public WebCamSource BuildWebCamSource() => new WebCamSource(
+            _preferredDefaultWebCamWidth,
+            _defaultAvailableWebCamResolutions
+        );
+
+        public VideoSource BuildVideoSource()
+        {
+            
+            return new VideoSource(_availableVideoSources);
+        }
 
         public InferenceMode inferenceMode { get; private set; }
         public bool isFinished { get; private set; }
@@ -22,30 +84,24 @@ namespace Mediapipe.Unity.Sample
 #if !DEBUG && !DEVELOPMENT_BUILD
       Debug.LogWarning("Logging for the MediaPipeUnityPlugin will be suppressed. To enable logging, please check the 'Development Build' option and build.");
 #endif
-
-            Logger.MinLogLevel = _appSettings.logLevel;
-
+            Logger.MinLogLevel = logLevel;
             Protobuf.SetLogHandler(Protobuf.DefaultLogHandler);
-
-            Debug.Log("Setting global flags...");
-            _appSettings.ResetGlogFlags();
+            this.ResetGlogFlags();
             Glog.Initialize("MediaPipeUnityPlugin");
             _isGlogInitialized = true;
-
-            Debug.Log("Initializing AssetLoader...");
-            switch (_appSettings.assetLoaderType)
+            switch (this.assetLoaderType)
             {
-                case AppSettings.AssetLoaderType.AssetBundle:
+                case AssetLoaderType.AssetBundle:
                 {
                     AssetLoader.Provide(new AssetBundleResourceManager("mediapipe"));
                     break;
                 }
-                case AppSettings.AssetLoaderType.StreamingAssets:
+                case AssetLoaderType.StreamingAssets:
                 {
                     AssetLoader.Provide(new StreamingAssetsResourceManager());
                     break;
                 }
-                case AppSettings.AssetLoaderType.Local:
+                case AssetLoaderType.Local:
                 {
 #if UNITY_EDITOR
                     AssetLoader.Provide(new LocalResourceManager());
@@ -58,14 +114,14 @@ namespace Mediapipe.Unity.Sample
                 }
                 default:
                 {
-                    Debug.LogError($"AssetLoaderType is unknown: {_appSettings.assetLoaderType}");
+                    Debug.LogError($"AssetLoaderType is unknown: {this.assetLoaderType}");
                     yield break;
                 }
             }
+
             DecideInferenceMode();
             if (inferenceMode == InferenceMode.GPU)
             {
-                Debug.Log("Initializing GPU resources...");
                 yield return GpuManager.Initialize();
                 if (!GpuManager.IsInitialized)
                 {
@@ -73,17 +129,15 @@ namespace Mediapipe.Unity.Sample
                         "If your native library is built for CPU, change 'Preferable Inference Mode' to CPU from the Inspector Window for AppSettings");
                 }
             }
-            Debug.Log("Preparing ImageSource...");
-            ImageSourceProvider.Initialize(
-                _appSettings.BuildWebCamSource(), _appSettings.BuildVideoSource());
-            ImageSourceProvider.Switch(_appSettings.defaultImageSource);
+            ImageSourceProvider.Initialize(this.BuildWebCamSource(), this.BuildVideoSource());
+            ImageSourceProvider.Switch(this.defaultImageSource);
             isFinished = true;
         }
 
         private void DecideInferenceMode()
         {
 #if UNITY_EDITOR_OSX || UNITY_EDITOR_WIN
-            if (_appSettings.preferableInferenceMode == InferenceMode.GPU)
+            if (this.preferableInferenceMode == InferenceMode.GPU)
             {
                 Debug.LogWarning("Current platform does not support GPU inference mode, so falling back to CPU mode");
             }
@@ -100,6 +154,7 @@ namespace Mediapipe.Unity.Sample
             {
                 Glog.Shutdown();
             }
+
             Protobuf.ResetLogHandler();
         }
     }

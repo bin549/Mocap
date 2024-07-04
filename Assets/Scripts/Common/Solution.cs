@@ -7,8 +7,6 @@ namespace Mediapipe.Unity.Sample
     {
         private static readonly string _BootstrapName = nameof(Bootstrap);
 
-        [SerializeField] private GameObject _bootstrapPrefab;
-
 #pragma warning disable IDE1006
         protected virtual string TAG => GetType().Name;
 #pragma warning restore IDE1006
@@ -16,11 +14,8 @@ namespace Mediapipe.Unity.Sample
         public Bootstrap bootstrap { get; private set; }
         protected bool isPaused;
 
-        protected virtual IEnumerator Start()
+        protected virtual void Start()
         {
-            bootstrap = FindBootstrap();
-            yield return new WaitUntil(() => bootstrap.isFinished);
-
             Play();
         }
 
@@ -68,21 +63,6 @@ namespace Mediapipe.Unity.Sample
             {
                 textureFrame.ReadTextureFromOnCPU(sourceTexture);
             }
-        }
-
-        protected Bootstrap FindBootstrap()
-        {
-            var bootstrapObj = GameObject.Find(_BootstrapName);
-
-            if (bootstrapObj == null)
-            {
-                Debug.Log("Initializing the Bootstrap GameObject");
-                bootstrapObj = Instantiate(_bootstrapPrefab);
-                bootstrapObj.name = _BootstrapName;
-                DontDestroyOnLoad(bootstrapObj);
-            }
-
-            return bootstrapObj.GetComponent<Bootstrap>();
         }
     }
 }

@@ -58,7 +58,6 @@ namespace Mediapipe.Unity.Sample.PoseTracking
                 graphRunner.OnPoseLandmarksOutput += OnPoseLandmarksOutput;
                 graphRunner.OnPoseWorldLandmarksOutput += OnPoseWorldLandmarksOutput;
             }
-
             var imageSource = ImageSourceProvider.ImageSource;
             SetupAnnotationController(_poseLandmarksAnnotationController, imageSource);
         }
