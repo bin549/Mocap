@@ -18,7 +18,6 @@ public class AppSettings : MonoBehaviour
     public GameObject[] environments;
     public GameObject[] avatarModels;
     private VideoSource _videoSource;
-    
     private void Awake()
     {
         if (_Instance != null)

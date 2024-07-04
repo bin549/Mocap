@@ -6,32 +6,40 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Button modelsButton;
-    public GameObject modelsPanel;
-    public Button videoSourcesButton;
-    public GameObject videoSourcesPanel;
-    public Button mapsButton;
-    public GameObject mapsPanel;
+    public Button modelSelectionButton;
+    public GameObject modelSelectionPanel;
+    public Button videoSourceSelectionButton;
+    public GameObject videoSourceSelectionPanel;
+    public Button mapSelectionButton;
+    public GameObject mapSelectionPanel;
     public Button settingsButton;
     public GameObject settingsPanel;
+    [SerializeField] private AvatarCameraController _avatarCameraController;
+
 
     private void Start()
     {
-        modelsButton.onClick.AddListener((() =>
+        modelSelectionButton.onClick.AddListener((() =>
         {
-            modelsPanel.SetActive(!modelsPanel.activeSelf);
+            this.SetPanelActive(modelSelectionPanel);
         }));
-        videoSourcesButton.onClick.AddListener((() =>
+        videoSourceSelectionButton.onClick.AddListener((() =>
         {
-            videoSourcesPanel.SetActive(!videoSourcesPanel.activeSelf);
+            this.SetPanelActive(videoSourceSelectionPanel);
         }));
-        mapsButton.onClick.AddListener((() =>
+        mapSelectionButton.onClick.AddListener((() =>
         {
-            mapsPanel.SetActive(!mapsPanel.activeSelf);
+            this.SetPanelActive(mapSelectionPanel);
         }));
         settingsButton.onClick.AddListener((() =>
         {
-            settingsPanel.SetActive(!settingsPanel.activeSelf);
+            this.SetPanelActive(settingsPanel);
         }));
-    } 
+    }
+
+    private void SetPanelActive(GameObject panel)
+    {
+        panel.SetActive(!panel.activeSelf);       
+        this._avatarCameraController.isInputDisable = panel.activeSelf; 
+    }
 }

@@ -136,8 +136,9 @@ GameObject:
   - component: {fileID: 63434767}
   - component: {fileID: 63434766}
   - component: {fileID: 63434768}
+  - component: {fileID: 63434769}
   m_Layer: 5
-  m_Name: 'VideoSourcesPanel '
+  m_Name: 'VideoSourceSelectionPanel '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,6 +250,18 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &63434769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63434764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7256af74f7a3f4dd69bc9e7717c9deed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &102440732
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +903,7 @@ GameObject:
   - component: {fileID: 339304519}
   - component: {fileID: 339304521}
   m_Layer: 5
-  m_Name: MapsButton
+  m_Name: MapsSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,81 +1385,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537338839}
   m_CullTransparentMesh: 1
---- !u!1 &628501897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 628501898}
-  - component: {fileID: 628501900}
-  - component: {fileID: 628501899}
-  m_Layer: 5
-  m_Name: Image (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &628501898
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628501897}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 693846238}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 265, y: -55}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &628501899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628501897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &628501900
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628501897}
-  m_CullTransparentMesh: 1
 --- !u!1 &683915223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,13 +1472,14 @@ GameObject:
   - component: {fileID: 693846240}
   - component: {fileID: 693846239}
   - component: {fileID: 693846241}
+  - component: {fileID: 693846242}
   m_Layer: 5
-  m_Name: 'MapsPanel '
+  m_Name: 'MapSelectionPanel '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &693846238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1555,7 +1494,6 @@ RectTransform:
   m_Children:
   - {fileID: 2053408015}
   - {fileID: 1793127175}
-  - {fileID: 628501898}
   m_Father: {fileID: 725013498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1625,6 +1563,18 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &693846242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693846237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b9fa4465cef495383f8314c359d0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &710506645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1913,7 @@ GameObject:
   - component: {fileID: 785387222}
   - component: {fileID: 785387223}
   m_Layer: 0
-  m_Name: UiManager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1996,14 +1946,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a44c1118583470aad031557895f9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelsButton: {fileID: 1788839673}
-  modelsPanel: {fileID: 1978783608}
-  videoSourcesButton: {fileID: 1011378622}
-  videoSourcesPanel: {fileID: 63434764}
-  mapsButton: {fileID: 339304521}
-  mapsPanel: {fileID: 693846237}
+  modelSelectionButton: {fileID: 1788839673}
+  modelSelectionPanel: {fileID: 1978783608}
+  videoSourceSelectionButton: {fileID: 1011378622}
+  videoSourceSelectionPanel: {fileID: 63434764}
+  mapSelectionButton: {fileID: 339304521}
+  mapSelectionPanel: {fileID: 693846237}
   settingsButton: {fileID: 1553072320}
   settingsPanel: {fileID: 7038500568173208042}
+  _avatarCameraController: {fileID: 1264297882}
 --- !u!1 &839997211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,7 +2193,7 @@ GameObject:
   - component: {fileID: 1011378620}
   - component: {fileID: 1011378622}
   m_Layer: 5
-  m_Name: VideoSourcesButton
+  m_Name: VideoSourceSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2810,6 +2761,7 @@ MonoBehaviour:
   distance: 7
   scrollSpeed: 5
   rotateSpeed: 30
+  isInputDisable: 0
 --- !u!1 &1305342806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3788,7 +3740,7 @@ GameObject:
   - component: {fileID: 1788839671}
   - component: {fileID: 1788839673}
   m_Layer: 5
-  m_Name: ModelsButton
+  m_Name: ModelSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3907,7 +3859,7 @@ GameObject:
   - component: {fileID: 1793127177}
   - component: {fileID: 1793127176}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: MapItem2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3927,10 +3879,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 693846238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 160, y: -55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1793127176
 MonoBehaviour:
@@ -4180,8 +4132,9 @@ GameObject:
   - component: {fileID: 1978783611}
   - component: {fileID: 1978783610}
   - component: {fileID: 1978783612}
+  - component: {fileID: 1978783613}
   m_Layer: 5
-  m_Name: ModelsPanel
+  m_Name: ModelSelectionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4271,6 +4224,18 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1978783613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978783608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92830cb404b96427aba1d3c52565a5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2053408014
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,7 +4248,7 @@ GameObject:
   - component: {fileID: 2053408017}
   - component: {fileID: 2053408016}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MapItem1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4303,10 +4268,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 693846238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55, y: -55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053408016
 MonoBehaviour:

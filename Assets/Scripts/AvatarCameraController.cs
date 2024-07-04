@@ -11,6 +11,7 @@ public class AvatarCameraController : MonoBehaviour
     public float distance = 7;
     public float scrollSpeed = 30;
     public float rotateSpeed = 30;
+    public bool isInputDisable = false;
 
     private void Start()
     {
@@ -21,6 +22,10 @@ public class AvatarCameraController : MonoBehaviour
 
     private void Update()
     {
+        if (isInputDisable)
+        {
+            return;
+        }
         transform.position = offsetPosition + avatarTransform.position;
         RotateView();
         ScrollViewMouse();
