@@ -6,22 +6,23 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Button modelSelectionButton;
-    public GameObject modelSelectionPanel;
+    public Button avatarSelectionButton;
+    public GameObject avatarSelectionPanel;
     public Button videoSourceSelectionButton;
     public GameObject videoSourceSelectionPanel;
     public Button mapSelectionButton;
     public GameObject mapSelectionPanel;
     public Button settingsButton;
     public GameObject settingsPanel;
+    public GameObject deviceSelectionPanel;
     [SerializeField] private AvatarCameraController _avatarCameraController;
 
 
     private void Start()
     {
-        modelSelectionButton.onClick.AddListener((() =>
+        avatarSelectionButton.onClick.AddListener((() =>
         {
-            this.SetPanelActive(modelSelectionPanel);
+            this.SetPanelActive(avatarSelectionPanel);
         }));
         videoSourceSelectionButton.onClick.AddListener((() =>
         {
@@ -35,6 +36,14 @@ public class UiManager : MonoBehaviour
         {
             this.SetPanelActive(settingsPanel);
         }));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            deviceSelectionPanel.SetActive(!deviceSelectionPanel.activeSelf);
+        }
     }
 
     private void SetPanelActive(GameObject panel)

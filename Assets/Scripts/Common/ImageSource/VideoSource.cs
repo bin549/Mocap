@@ -8,15 +8,15 @@ namespace Mediapipe.Unity
 {
     public class VideoSource : ImageSource
     {
-        private readonly VideoClip[] _availableSources;
+        [SerializeField] private VideoClip[] _availableSources;
 
-        // gameObject is used to add VideoPlayer component
-        private readonly GameObject _gameObject;
+        [SerializeField] private GameObject _gameObject;
+
+        private VideoPlayer _videoPlayer;
 
         public VideoSource(VideoClip[] availableSources)
         {
             _availableSources = availableSources;
-            _gameObject = new GameObject("Video Player");
         }
 
         private VideoClip _video;
@@ -25,7 +25,7 @@ namespace Mediapipe.Unity
         {
             get
             {
-                if (_video == null && _availableSources != null && _availableSources.Length > 0)
+                if (!_video && _availableSources != null && _availableSources.Length > 0)
                 {
                     video = _availableSources[0];
                 }
@@ -38,8 +38,6 @@ namespace Mediapipe.Unity
                 resolution = new ResolutionStruct((int)_video.width, (int)_video.height, _video.frameRate);
             }
         }
-
-        private VideoPlayer _videoPlayer;
 
         public override string sourceName => video != null ? video.name : null;
 
@@ -68,17 +66,15 @@ namespace Mediapipe.Unity
 
         public override IEnumerator Play()
         {
-            if (video == null)
+            if (!video)
             {
                 throw new InvalidOperationException("Video is not selected");
             }
-
-            _videoPlayer = _gameObject.AddComponent<VideoPlayer>();
-            _videoPlayer.renderMode = VideoRenderMode.APIOnly;
+            _videoPlayer = _gameObject.GetComponent<VideoPlayer>();
+            // _videoPlayer.renderMode = VideoRenderMode.APIOnly;
             _videoPlayer.isLooping = true;
             _videoPlayer.clip = video;
             _videoPlayer.Prepare();
-
             yield return new WaitUntil(() => _videoPlayer.isPrepared);
             _videoPlayer.Play();
         }
@@ -104,6 +100,7 @@ namespace Mediapipe.Unity
             {
                 return;
             }
+
             _videoPlayer.Pause();
         }
 
@@ -119,6 +116,6 @@ namespace Mediapipe.Unity
             _videoPlayer = null;
         }
 
-        public override Texture GetCurrentTexture() => _videoPlayer != null ? _videoPlayer.texture : null;
+        public override Texture GetCurrentTexture() => _videoPlayer ? _videoPlayer.texture : null;
     }
 }

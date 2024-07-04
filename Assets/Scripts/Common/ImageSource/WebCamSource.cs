@@ -12,7 +12,7 @@ namespace Mediapipe.Unity
 {
     public class WebCamSource : ImageSource
     {
-        private readonly int _preferableDefaultWidth = 1280;
+        [SerializeField] private int _preferableDefaultWidth = 1280;
 
         private const string _TAG = nameof(WebCamSource);
 
@@ -34,7 +34,7 @@ namespace Mediapipe.Unity
             get => _webCamTexture;
             set
             {
-                if (_webCamTexture != null)
+                if (!_webCamTexture)
                 {
                     _webCamTexture.Stop();
                 }

@@ -25,6 +25,7 @@ namespace Mediapipe.Unity.Sample
             {
                 Stop();
             }
+
             base.Play();
             _coroutine = StartCoroutine(Run());
         }
@@ -89,6 +90,7 @@ namespace Mediapipe.Unity.Sample
                     yield return new WaitForEndOfFrame();
                     continue;
                 }
+
                 ReadFromImageSource(imageSource, textureFrame);
                 AddTextureFrameToInputStream(textureFrame);
                 yield return new WaitForEndOfFrame();
@@ -100,7 +102,7 @@ namespace Mediapipe.Unity.Sample
             }
         }
 
-        protected virtual void SetupScreen(ImageSource imageSource)
+        public virtual void SetupScreen(ImageSource imageSource)
         {
             screen.Initialize(imageSource);
         }

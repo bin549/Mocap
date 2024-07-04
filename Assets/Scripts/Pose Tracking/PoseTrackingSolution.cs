@@ -45,7 +45,7 @@ namespace Mediapipe.Unity.Sample.PoseTracking
             set => graphRunner.minTrackingConfidence = value;
         }
 
-        protected override void SetupScreen(ImageSource imageSource)
+        public override void SetupScreen(ImageSource imageSource)
         {
             base.SetupScreen(imageSource);
         }

@@ -42,14 +42,13 @@ namespace Mediapipe.Unity.Sample
                 new ImageSource.ResolutionStruct(1920, 1080, 30),
             };
 
-        [Header("Video Source")] [SerializeField]
-        private VideoClip[] _availableVideoSources;
-
         public ImageSourceType defaultImageSource => _defaultImageSource;
         public InferenceMode preferableInferenceMode => _preferableInferenceMode;
         public AssetLoaderType assetLoaderType => _assetLoaderType;
         public Logger.LogLevel logLevel => _logLevel;
-
+        public WebCamSource webCamSource;
+        public VideoSource videoSource;
+        
         public void ResetGlogFlags()
         {
             Glog.Logtostderr = true;
@@ -58,15 +57,18 @@ namespace Mediapipe.Unity.Sample
             Glog.V = _glogV;
         }
 
-        public WebCamSource BuildWebCamSource() => new WebCamSource(
-            _preferredDefaultWebCamWidth,
-            _defaultAvailableWebCamResolutions
-        );
+        public WebCamSource BuildWebCamSource()
+        {
+            return webCamSource;
+            // new WebCamSource(
+            //     _preferredDefaultWebCamWidth,
+            //     _defaultAvailableWebCamResolutions
+            // );
+        }
 
         public VideoSource BuildVideoSource()
         {
-            
-            return new VideoSource(_availableVideoSources);
+            return videoSource;
         }
 
         public InferenceMode inferenceMode { get; private set; }
@@ -131,7 +133,7 @@ namespace Mediapipe.Unity.Sample
             }
             ImageSourceProvider.Initialize(this.BuildWebCamSource(), this.BuildVideoSource());
             ImageSourceProvider.Switch(this.defaultImageSource);
-            isFinished = true;
+            isFinished = true; 
         }
 
         private void DecideInferenceMode()
@@ -145,6 +147,12 @@ namespace Mediapipe.Unity.Sample
 #else
       inferenceMode = _appSettings.preferableInferenceMode;
 #endif
+        }
+
+        public void SwitchDevice(ImageSourceType imageSource)
+        {
+            this._defaultImageSource = imageSource;
+            ImageSourceProvider.Switch(this.defaultImageSource);
         }
 
         private void OnApplicationQuit()

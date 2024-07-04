@@ -23,11 +23,10 @@ namespace Mediapipe.Unity
         public void Initialize(ImageSource imageSource)
         {
             _imageSource = imageSource;
-
-            Resize(_imageSource.textureWidth, _imageSource.textureHeight);
+            // Resize(_imageSource.textureWidth, _imageSource.textureHeight);
             Rotate(_imageSource.rotation.Reverse());
             ResetUvRect(RunningMode.Async);
-            texture = imageSource.GetCurrentTexture();
+            // texture = imageSource.GetCurrentTexture();
         }
 
         public void Resize(int width, int height)
@@ -60,6 +59,7 @@ namespace Mediapipe.Unity
             {
                 rect = FlipVertically(rect);
             }
+
             if (_imageSource.isFrontFacing)
             {
                 var rotation = _imageSource.rotation;
@@ -72,6 +72,7 @@ namespace Mediapipe.Unity
                     rect = FlipVertically(rect);
                 }
             }
+
             uvRect = rect;
         }
 
