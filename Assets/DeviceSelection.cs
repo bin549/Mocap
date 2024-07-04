@@ -11,6 +11,8 @@ public class DeviceSelection : MonoBehaviour
     [SerializeField] private PoseTrackingSolution solution;
     [SerializeField] private Button webcamButton;
     [SerializeField] private Button videoButton;
+    [SerializeField] private UiManager uiManager;
+    public AvatarCameraController avatarCameraController;
     
     private void Start()
     {
@@ -21,8 +23,10 @@ public class DeviceSelection : MonoBehaviour
         });
         videoButton.onClick.AddListener(() =>
         {
-            _bootstrap.SwitchDevice(ImageSourceType.Video);
+            // _bootstrap.SwitchDevice(ImageSourceType.Video);
             // solution.SetupScreen(_bootstrap.ImageSource);
+            uiManager.ToggleUI();
+            avatarCameraController.StartControl();
         });
     }
 }

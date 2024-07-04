@@ -13,7 +13,7 @@ public class AvatarCameraController : MonoBehaviour
     public float rotateSpeed = 30;
     public bool isInputDisable = false;
 
-    private void Start()
+    public void StartControl()
     {
         avatarTransform = avatar.gameObject.transform;
         transform.LookAt(avatarTransform.position);

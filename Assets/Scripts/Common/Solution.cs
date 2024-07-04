@@ -50,6 +50,10 @@ namespace Mediapipe.Unity.Sample
         protected static void ReadFromImageSource(ImageSource imageSource, TextureFrame textureFrame)
         {
             var sourceTexture = imageSource.GetCurrentTexture();
+            if (!sourceTexture)
+            {
+                return;
+            }
             var textureType = sourceTexture.GetType();
             if (textureType == typeof(WebCamTexture))
             {

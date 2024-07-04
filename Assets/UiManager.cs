@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    public GameObject[] uiPanels;
     public Button avatarSelectionButton;
     public GameObject avatarSelectionPanel;
     public Button videoSourceSelectionButton;
-    public GameObject videoSourceSelectionPanel;
+    public VideoSourceSelection videoSourceSelection;
     public Button mapSelectionButton;
     public GameObject mapSelectionPanel;
     public Button settingsButton;
     public GameObject settingsPanel;
     public GameObject deviceSelectionPanel;
     [SerializeField] private AvatarCameraController _avatarCameraController;
-
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class UiManager : MonoBehaviour
         }));
         videoSourceSelectionButton.onClick.AddListener((() =>
         {
-            this.SetPanelActive(videoSourceSelectionPanel);
+            this.SetPanelActive(videoSourceSelection.gameObject);
         }));
         mapSelectionButton.onClick.AddListener((() =>
         {
@@ -36,13 +36,31 @@ public class UiManager : MonoBehaviour
         {
             this.SetPanelActive(settingsPanel);
         }));
+        videoSourceSelection.videoPlayer.Pause();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            deviceSelectionPanel.SetActive(!deviceSelectionPanel.activeSelf);
+            this.ToggleUI();
+        }
+    }
+
+    public void ToggleUI()
+    {
+        deviceSelectionPanel.SetActive(!deviceSelectionPanel.activeSelf);
+        foreach (var uiPanel in uiPanels)
+        {
+            uiPanel.SetActive(!deviceSelectionPanel.activeSelf);
+        }
+        if (deviceSelectionPanel.activeSelf)
+        {
+            videoSourceSelection.videoPlayer.Pause();
+        }
+        else
+        {
+            videoSourceSelection.videoPlayer.Play();
         }
     }
 

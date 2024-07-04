@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 
 namespace Mediapipe.Unity.Sample.PoseTracking
-{
-    internal class Mediapipe2UnitySkeletonController : MonoBehaviour
+{ 
+    public class Mediapipe2UnitySkeletonController : MonoBehaviour
     {
         [SerializeField] private HumanJointFactory jointFactory;
         [SerializeField] private HashSet<HumanJointCalculator> calculators;

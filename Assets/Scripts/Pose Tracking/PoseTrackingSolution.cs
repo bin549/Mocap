@@ -9,6 +9,11 @@ namespace Mediapipe.Unity.Sample.PoseTracking
         [SerializeField] private PoseLandmarkListAnnotationController _poseLandmarksAnnotationController;
         [SerializeField] private Mediapipe2UnitySkeletonController _mediapipe2UnitySkeletonController;
 
+        public void SetAvatar(Mediapipe2UnitySkeletonController mediapipe2UnitySkeletonController)
+        {
+            this._mediapipe2UnitySkeletonController = mediapipe2UnitySkeletonController;
+        }
+        
         public PoseTrackingGraph.ModelComplexity modelComplexity
         {
             get => graphRunner.modelComplexity;
