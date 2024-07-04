@@ -17,6 +17,7 @@ public class AppSettings : MonoBehaviour
     public GameObject avatarModelPivot;
     public GameObject[] environments;
     public GameObject[] avatarModels;
+    private VideoSource _videoSource;
     
     private void Awake()
     {
@@ -32,10 +33,6 @@ public class AppSettings : MonoBehaviour
     
     private void Start()
     {
-        environments = environmentPivot.GetComponentsInChildren<GameObject>();
-        avatarModels = avatarModelPivot.GetComponentsInChildren<GameObject>();
-        
-        
         videosFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Videos");
         modelsFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Models");
         savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
