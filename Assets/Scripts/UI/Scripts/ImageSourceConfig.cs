@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +9,6 @@ namespace Mediapipe.Unity.Sample.UI
   public class ImageSourceConfig : ModalContents
   {
     private const string _SourceTypePath = "Scroll View/Viewport/Contents/SourceType/Dropdown";
-    private const string _SourcePath = "Scroll View/Viewport/Contents/Source/Dropdown";
     private const string _ResolutionPath = "Scroll View/Viewport/Contents/Resolution/Dropdown";
     private const string _IsHorizontallyFlippedPath = "Scroll View/Viewport/Contents/IsHorizontallyFlipped/Toggle";
 
@@ -29,7 +22,6 @@ namespace Mediapipe.Unity.Sample.UI
 
     private void Start()
     {
-      _solution = GameObject.Find("Solution").GetComponent<Solution>();
       InitializeContents();
     }
 
@@ -73,10 +65,6 @@ namespace Mediapipe.Unity.Sample.UI
 
     private void InitializeSource()
     {
-      _sourceInput = gameObject.transform.Find(_SourcePath).gameObject.GetComponent<Dropdown>();
-      _sourceInput.ClearOptions();
-      _sourceInput.onValueChanged.RemoveAllListeners();
-
       var imageSource = ImageSourceProvider.ImageSource;
       var sourceNames = imageSource.sourceCandidateNames;
 
