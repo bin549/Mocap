@@ -5,7 +5,6 @@ using UnityEngine.Video;
 public class VideoPlayerController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public AppSettings appSettings;
 
     public enum Status
     {
@@ -14,16 +13,6 @@ public class VideoPlayerController : MonoBehaviour
     }
 
     private Status status = Status.VideoPlay;
-
-    private void Awake()
-    {
-        appSettings = GameObject.FindObjectOfType<AppSettings>();
-    }
-
-    private void Start()
-    {
-        videoPlayer = appSettings.GetVideoPlayer();
-    }
 
     private void Update()
     {

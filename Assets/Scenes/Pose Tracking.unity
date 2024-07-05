@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6de3b18bb00cc1b4a8edb47f4eb9f643, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 63c7f212f60aadc47945b935dc40e7c0, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25048748, g: 0.19165033, b: 0.39453086, a: 1}
+  m_IndirectSpecularColor: {r: 0.5342607, g: 0.8328695, b: 0.9652136, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,6 +250,7 @@ MonoBehaviour:
   videoClip: {fileID: 32900000, guid: 3cb14086fcf0344148db93aa69653db2, type: 3}
   videoClipItem: {fileID: 537338843}
   avatarCameraController: {fileID: 1264297882}
+  _uiManager: {fileID: 785387223}
 --- !u!1 &128706669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1359,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b9fa4465cef495383f8314c359d0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneOne: {fileID: 1085047432}
+  sceneTwo: {fileID: 1216272296777202498}
+  sceneOneButton: {fileID: 2053408018}
+  sceneTwoButton: {fileID: 1793127178}
+  sceneOneMaterial: {fileID: 2100000, guid: 63c7f212f60aadc47945b935dc40e7c0, type: 2}
+  sceneTwoMaterial: {fileID: 2100000, guid: 6de3b18bb00cc1b4a8edb47f4eb9f643, type: 2}
+  sceneOneLight: {fileID: 4570745323401863512}
+  sceneTwoLight: {fileID: 7625113008801975156}
+  avatarCameraController: {fileID: 1264297882}
+  videoPlayer: {fileID: 710506646}
+  _uiManager: {fileID: 785387223}
 --- !u!1 &710506645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,7 +1625,7 @@ MonoBehaviour:
   - {fileID: 761721421}
   - {fileID: 1705805449}
   avatarSelectionButton: {fileID: 1788839673}
-  avatarSelectionPanel: {fileID: 1978783608}
+  avatarSelectionPanel: {fileID: 1978783613}
   videoSourceSelectionButton: {fileID: 1011378622}
   videoSourceSelection: {fileID: 63434769}
   mapSelectionButton: {fileID: 339304521}
@@ -1622,6 +1634,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 7038500568173208042}
   deviceSelectionPanel: {fileID: 1244952854}
   _avatarCameraController: {fileID: 1264297882}
+  screen: {fileID: 761721423}
 --- !u!1 &920255498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,9 +2093,6 @@ MonoBehaviour:
   uiManager: {fileID: 785387223}
   avatarCameraController: {fileID: 1264297882}
   defaultImageSource: 0
-  webCamSource: {fileID: 275874973}
-  videoTexture: {fileID: 8400000, guid: 292c7f1bd7378490d95034fc6f0afb94, type: 2}
-  screen: {fileID: 761721423}
 --- !u!1 &1250650595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,7 +2388,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1377356976}
   - component: {fileID: 1377356975}
-  - component: {fileID: 1377356974}
   m_Layer: 0
   m_Name: ViewCamera
   m_TagString: Untagged
@@ -2386,14 +2395,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!81 &1377356974
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377356973}
-  m_Enabled: 1
 --- !u!20 &1377356975
 Camera:
   m_ObjectHideFlags: 0
@@ -2454,7 +2455,7 @@ Transform:
   m_GameObject: {fileID: 1377356973}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.103718, y: 6.002368, z: -5.9941034}
+  m_LocalPosition: {x: -15.103718, y: 6.44, z: -8.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2512,13 +2513,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowSkeleton: 0
   isBVHRecorder: 0
-  videoPlayer: {fileID: 0}
   avatar: {fileID: 0}
   avatarAnimator: {fileID: 0}
   environmentPivot: {fileID: 1250650595}
   avatarModelPivot: {fileID: 2745262878207151246}
   environments: []
   avatarModels: []
+  viewCamera: {fileID: 1377356975}
 --- !u!1 &1449396712
 GameObject:
   m_ObjectHideFlags: 0
@@ -3351,6 +3352,7 @@ GameObject:
   - component: {fileID: 1793127175}
   - component: {fileID: 1793127177}
   - component: {fileID: 1793127176}
+  - component: {fileID: 1793127178}
   m_Layer: 5
   m_Name: MapItem2
   m_TagString: Untagged
@@ -3415,6 +3417,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793127174}
   m_CullTransparentMesh: 1
+--- !u!114 &1793127178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793127174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1793127176}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1814027546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,7 +3749,9 @@ MonoBehaviour:
   currentAvatar: {fileID: 1349151495363637}
   selectedAvatar: {fileID: 244553203}
   solution: {fileID: 275874969}
-  uiManager: {fileID: 0}
+  videoPlayer: {fileID: 710506646}
+  avatarCameraController: {fileID: 1264297882}
+  _uiManager: {fileID: 785387223}
 --- !u!1 &2053408014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3715,6 +3763,7 @@ GameObject:
   - component: {fileID: 2053408015}
   - component: {fileID: 2053408017}
   - component: {fileID: 2053408016}
+  - component: {fileID: 2053408018}
   m_Layer: 5
   m_Name: MapItem1
   m_TagString: Untagged
@@ -3779,6 +3828,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053408014}
   m_CullTransparentMesh: 1
+--- !u!114 &2053408018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053408014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2053408016}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2110688812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4240,7 +4333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1358932815845355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5984,7 +6077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &499253566517204457
 Camera:
   m_ObjectHideFlags: 0
@@ -6922,7 +7015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1684017701429871308
 GameObject:
   m_ObjectHideFlags: 0

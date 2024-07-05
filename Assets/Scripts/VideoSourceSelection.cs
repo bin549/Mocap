@@ -12,10 +12,12 @@ public class VideoSourceSelection : MonoBehaviour
     public VideoClip videoClip;
     public Button videoClipItem;
     [SerializeField] private AvatarCameraController avatarCameraController;
+    [SerializeField] private UiManager _uiManager;
 
     private void OnEnable()
     {
         this.videoPlayer.Pause();
+        _uiManager.screen.gameObject.SetActive(false);
     }
 
     private void OnDisable()
@@ -25,6 +27,7 @@ public class VideoSourceSelection : MonoBehaviour
             return;
         }
         this.videoPlayer.Play();
+        _uiManager.screen.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -40,10 +43,5 @@ public class VideoSourceSelection : MonoBehaviour
     public void UpdateVideoClip()
     {
         this.videoPlayer.clip = videoClip;
-    }
-
- private   void Update()
-    {
-        
     }
 }

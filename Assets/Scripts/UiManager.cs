@@ -1,17 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Mediapipe.Unity.Sample.PoseTracking;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 
 public class UiManager : MonoBehaviour
 {
     public GameObject[] uiPanels;
     public Button avatarSelectionButton;
-    public GameObject avatarSelectionPanel;
+    public AvatarSelection avatarSelectionPanel;
     public Button videoSourceSelectionButton;
     public VideoSourceSelection videoSourceSelection;
     public Button mapSelectionButton;
@@ -20,10 +15,14 @@ public class UiManager : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject deviceSelectionPanel;
     [SerializeField] private AvatarCameraController _avatarCameraController;
+    public RawImage screen;
 
     private void Start()
     {
-        avatarSelectionButton.onClick.AddListener((() => { this.SetPanelActive(avatarSelectionPanel); }));
+        avatarSelectionButton.onClick.AddListener((() =>
+        {
+            this.SetPanelActive(avatarSelectionPanel.gameObject);
+        }));
         videoSourceSelectionButton.onClick.AddListener((() =>
         {
             this.SetPanelActive(videoSourceSelection.gameObject);
@@ -57,7 +56,6 @@ public class UiManager : MonoBehaviour
         {
             uiPanel.SetActive(!deviceSelectionPanel.activeSelf);
         }
-
         if (deviceSelectionPanel.activeSelf)
         {
             videoSourceSelection.videoPlayer.Pause();

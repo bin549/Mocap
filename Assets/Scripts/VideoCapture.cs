@@ -31,11 +31,6 @@ public class VideoCapture : MonoBehaviour
         appSettings = GameObject.FindObjectOfType<AppSettings>();
     }
 
-    private void Start()
-    {
-        appSettings.SetVideoPlayer(videoPlayer);
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -99,7 +94,6 @@ public class VideoCapture : MonoBehaviour
         }
 
         webCamTexture.Play();
-
         //  rectTransform.sizeDelta = new Vector2(rawImageWidth, rawImageWidth * webCamTexture.height / webCamTexture.width);
         float aspect = (float)webCamTexture.width / webCamTexture.height;
         this.transform.localScale = new Vector3(aspect, 1, 1) * scale;
@@ -127,8 +121,6 @@ public class VideoCapture : MonoBehaviour
             videoTexture = new RenderTexture(1920, 1080, 24);
         }
 
-        //        videoTexture = new RenderTexture(1920, 1080, 24);
-        // videoTexture = new RenderTexture(1200, 1200, 24);
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = videoTexture;
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -10,7 +11,6 @@ public class AppSettings : MonoBehaviour
     private static AppSettings _Instance;
     public bool isShowSkeleton = false;
     public bool isBVHRecorder = false;
-    public VideoPlayer videoPlayer;
     public Avatar avatar;
     [SerializeField] private Animator avatarAnimator;
     public GameObject environmentPivot;
@@ -18,6 +18,8 @@ public class AppSettings : MonoBehaviour
     public GameObject[] environments;
     public GameObject[] avatarModels;
     private VideoSource _videoSource;
+    [SerializeField] private Camera viewCamera;
+    
     private void Awake()
     {
         if (_Instance != null)
@@ -29,7 +31,19 @@ public class AppSettings : MonoBehaviour
         _Instance = this;
         DontDestroyOnLoad(this);
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            viewCamera.gameObject.SetActive(true);
+        }
+        if (Input.GetKeyUp(KeyCode.V))
+        {
+            viewCamera.gameObject.SetActive(false);
+        }
+    }
+
     private void Start()
     {
         videosFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Videos");
@@ -40,21 +54,6 @@ public class AppSettings : MonoBehaviour
             FolderUtils.SafeCreateDirectory(Application.dataPath + @"/Resources");
             savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
         }
-    }
-    
-    public void SetVideoPlayer(VideoPlayer videoPlayer)
-    {
-        this.videoPlayer = videoPlayer;
-    }
-    
-    public VideoPlayer GetVideoPlayer()
-    {
-        if (videoPlayer != null)
-        {
-            return videoPlayer;
-        }
-    
-        return null;
     }
     
     public void SetAvatar(Avatar avatar)

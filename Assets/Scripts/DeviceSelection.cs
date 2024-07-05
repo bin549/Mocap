@@ -14,6 +14,7 @@ public class DeviceSelection : MonoBehaviour
     [SerializeField] private UiManager uiManager;
     public AvatarCameraController avatarCameraController;
     public ImageSourceType defaultImageSource;
+    public GameObject selectedModel;
     
     private void Start()
     {
@@ -29,6 +30,7 @@ public class DeviceSelection : MonoBehaviour
 
     private void OnDeviceSelected(ImageSourceType deviceType)
     {
+        selectedModel.SetActive(true);
         defaultImageSource = deviceType;
         uiManager.ToggleUI();
         avatarCameraController.StartControl();
