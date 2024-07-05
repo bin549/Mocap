@@ -38,7 +38,7 @@ namespace Mediapipe.Unity
             get => _webCamTexture;
             set
             {
-                if (!_webCamTexture)
+                if (_webCamTexture)
                 {
                     _webCamTexture.Stop();
                 }
