@@ -13,7 +13,7 @@ namespace Mediapipe.Unity.Sample
             Local,
         }
 
-        [SerializeField] private ImageSourceType _defaultImageSource;
+        [SerializeField] private DeviceSelection deviceSelection;
         [SerializeField] private InferenceMode _preferableInferenceMode;
         [SerializeField] private AssetLoaderType _assetLoaderType;
         [SerializeField] private Logger.LogLevel _logLevel = Logger.LogLevel.Debug;
@@ -42,7 +42,7 @@ namespace Mediapipe.Unity.Sample
                 new ImageSource.ResolutionStruct(1920, 1080, 30),
             };
 
-        public ImageSourceType defaultImageSource => _defaultImageSource;
+        public ImageSourceType defaultImageSource => deviceSelection.defaultImageSource;
         public InferenceMode preferableInferenceMode => _preferableInferenceMode;
         public AssetLoaderType assetLoaderType => _assetLoaderType;
         public Logger.LogLevel logLevel => _logLevel;
@@ -147,12 +147,6 @@ namespace Mediapipe.Unity.Sample
 #else
       inferenceMode = _appSettings.preferableInferenceMode;
 #endif
-        }
-
-        public void SwitchDevice(ImageSourceType imageSource)
-        {
-            this._defaultImageSource = imageSource;
-            ImageSourceProvider.Switch(this.defaultImageSource);
         }
 
         private void OnApplicationQuit()

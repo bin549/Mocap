@@ -13,20 +13,25 @@ public class DeviceSelection : MonoBehaviour
     [SerializeField] private Button videoButton;
     [SerializeField] private UiManager uiManager;
     public AvatarCameraController avatarCameraController;
+    public ImageSourceType defaultImageSource;
     
     private void Start()
     {
         webcamButton.onClick.AddListener(() =>
         {
-            _bootstrap.SwitchDevice(ImageSourceType.WebCamera);
-            // solution.SetupScreen(solution.);
+            this.OnDeviceSelected(ImageSourceType.WebCamera);
         });
         videoButton.onClick.AddListener(() =>
         {
-            // _bootstrap.SwitchDevice(ImageSourceType.Video);
-            // solution.SetupScreen(_bootstrap.ImageSource);
-            uiManager.ToggleUI();
-            avatarCameraController.StartControl();
+            this.OnDeviceSelected(ImageSourceType.Video);
         });
+    }
+
+    private void OnDeviceSelected(ImageSourceType deviceType)
+    {
+        defaultImageSource = deviceType;
+        uiManager.ToggleUI();
+        avatarCameraController.StartControl();
+        solution.gameObject.SetActive(true);
     }
 }

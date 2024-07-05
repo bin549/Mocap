@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d846393f8d9f20fa64b924b0d95e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultImageSource: 1
+  _defaultImageSource: 0
   _preferableInferenceMode: 1
   _assetLoaderType: 0
   _logLevel: 5
@@ -3604,6 +3604,7 @@ MonoBehaviour:
   currentAvatar: {fileID: 1349151495363637}
   selectedAvatar: {fileID: 244553203}
   solution: {fileID: 275874969}
+  uiManager: {fileID: 0}
 --- !u!1 &2053408014
 GameObject:
   m_ObjectHideFlags: 0
