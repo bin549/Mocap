@@ -13,7 +13,6 @@ public class SceneUI : MonoBehaviour
     [SerializeField] private GameObject UIComponents;
     public bool isUIActive = true;
     public bool isRecording = false;
-    [SerializeField] private BackButton backButton;
     [SerializeField] private Button recordButton;
     [SerializeField] private Animator recordButtonAnimator;
     [SerializeField] private Toggle isBVHRecorder;
@@ -27,7 +26,6 @@ public class SceneUI : MonoBehaviour
     {
         appSettings = GameObject.FindObjectOfType<AppSettings>();
         motionDataRecorder = GameObject.FindObjectOfType<MotionDataRecorder>();
-        backButton = GameObject.FindObjectOfType<BackButton>();
         UIComponents = GameObject.Find("UIComponents");
         recordButton = GameObject.Find("recordButton").GetComponent<Button>();
         btnVideoSelect = GameObject.Find("btnVideoSelect").GetComponent<Button>();
@@ -43,17 +41,7 @@ public class SceneUI : MonoBehaviour
         message = GameObject.Find("Message").GetComponent<Text>();
         UIComponents.SetActive(false);
         avatarAnimator = avatar.gameObject.GetComponent<Animator>();
-
-        btnVideoSelect.onClick.AddListener(() =>
-      {
-          backButton.VideoSelect();
-      });
-
-        recordButton.onClick.AddListener(() =>
-      {
-          RecordMotion();
-      });
-
+        recordButton.onClick.AddListener(() => { RecordMotion(); });
     }
 
     private void Update()
@@ -142,9 +130,11 @@ public class SceneUI : MonoBehaviour
                     {
                         FileInfo fi = new FileInfo(path);
                         bvhRecorder.directory = fi.DirectoryName;
-                        bvhRecorder.filename = string.Format("RecordMotion_{0}{1:yyyy_MM_dd_HH_mm_ss}.bvh", "motion", DateTime.Now);
+                        bvhRecorder.filename = string.Format("RecordMotion_{0}{1:yyyy_MM_dd_HH_mm_ss}.bvh", "motion",
+                            DateTime.Now);
                         bvhRecorder.saveBVH();
                     }
+
                     bvhRecorder.clearCapture();
                     bvhRecorder = null;
                     msg = "Record BVH Success!";
@@ -156,6 +146,7 @@ public class SceneUI : MonoBehaviour
                 }
             }
         }
+
         message.gameObject.SetActive(true);
         message.text = msg;
         Invoke("MessageHide", 0.5f);
@@ -163,7 +154,6 @@ public class SceneUI : MonoBehaviour
 
     public void MessageHide()
     {
-
         message.gameObject.SetActive(false);
     }
 }

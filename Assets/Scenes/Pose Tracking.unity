@@ -2093,6 +2093,7 @@ MonoBehaviour:
   uiManager: {fileID: 785387223}
   avatarCameraController: {fileID: 1264297882}
   defaultImageSource: 0
+  selectedModel: {fileID: 1349151495363637}
 --- !u!1 &1250650595
 GameObject:
   m_ObjectHideFlags: 0
