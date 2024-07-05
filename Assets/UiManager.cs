@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Mediapipe.Unity.Sample.PoseTracking;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class UiManager : MonoBehaviour
 {
@@ -21,22 +23,13 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        avatarSelectionButton.onClick.AddListener((() =>
-        {
-            this.SetPanelActive(avatarSelectionPanel);
-        }));
+        avatarSelectionButton.onClick.AddListener((() => { this.SetPanelActive(avatarSelectionPanel); }));
         videoSourceSelectionButton.onClick.AddListener((() =>
         {
             this.SetPanelActive(videoSourceSelection.gameObject);
         }));
-        mapSelectionButton.onClick.AddListener((() =>
-        {
-            this.SetPanelActive(mapSelectionPanel);
-        }));
-        settingsButton.onClick.AddListener((() =>
-        {
-            this.SetPanelActive(settingsPanel);
-        }));
+        mapSelectionButton.onClick.AddListener((() => { this.SetPanelActive(mapSelectionPanel); }));
+        settingsButton.onClick.AddListener((() => { this.SetPanelActive(settingsPanel); }));
         videoSourceSelection.videoPlayer.Pause();
     }
 
@@ -44,8 +37,17 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            this.ToggleUI();
+            QuitApp();
         }
+    }
+
+    public void QuitApp()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void ToggleUI()
@@ -55,6 +57,7 @@ public class UiManager : MonoBehaviour
         {
             uiPanel.SetActive(!deviceSelectionPanel.activeSelf);
         }
+
         if (deviceSelectionPanel.activeSelf)
         {
             videoSourceSelection.videoPlayer.Pause();
@@ -67,7 +70,7 @@ public class UiManager : MonoBehaviour
 
     private void SetPanelActive(GameObject panel)
     {
-        panel.SetActive(!panel.activeSelf);       
-        this._avatarCameraController.isInputDisable = panel.activeSelf; 
+        panel.SetActive(!panel.activeSelf);
+        this._avatarCameraController.isInputDisable = panel.activeSelf;
     }
 }
