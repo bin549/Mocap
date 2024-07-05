@@ -13,21 +13,25 @@ namespace Mediapipe.Unity
     public class WebCamSource : ImageSource
     {
         [SerializeField] private int _preferableDefaultWidth = 1280;
-
         private const string _TAG = nameof(WebCamSource);
-
         private readonly ResolutionStruct[] _defaultAvailableResolutions;
+        private static readonly object _PermissionLock = new object();
+        private static bool _IsPermitted = false;
+        [SerializeField] private WebCamTexture _webCamTexture;
+        public override int textureWidth => !isPrepared ? 0 : webCamTexture.width;
+        public override int textureHeight => !isPrepared ? 0 : webCamTexture.height;
+        public override bool isVerticallyFlipped => isPrepared && webCamTexture.videoVerticallyMirrored;
+        public override bool isFrontFacing => isPrepared && (webCamDevice is WebCamDevice valueOfWebCamDevice) &&
+                                              valueOfWebCamDevice.isFrontFacing;
+        public override RotationAngle rotation =>
+            !isPrepared ? RotationAngle.Rotation0 : (RotationAngle)webCamTexture.videoRotationAngle;
+        private WebCamDevice? _webCamDevice;
 
         public WebCamSource(int preferableDefaultWidth, ResolutionStruct[] defaultAvailableResolutions)
         {
             _preferableDefaultWidth = preferableDefaultWidth;
             _defaultAvailableResolutions = defaultAvailableResolutions;
         }
-
-        private static readonly object _PermissionLock = new object();
-        private static bool _IsPermitted = false;
-
-        private WebCamTexture _webCamTexture;
 
         private WebCamTexture webCamTexture
         {
@@ -42,19 +46,6 @@ namespace Mediapipe.Unity
                 _webCamTexture = value;
             }
         }
-
-        public override int textureWidth => !isPrepared ? 0 : webCamTexture.width;
-        public override int textureHeight => !isPrepared ? 0 : webCamTexture.height;
-
-        public override bool isVerticallyFlipped => isPrepared && webCamTexture.videoVerticallyMirrored;
-
-        public override bool isFrontFacing => isPrepared && (webCamDevice is WebCamDevice valueOfWebCamDevice) &&
-                                              valueOfWebCamDevice.isFrontFacing;
-
-        public override RotationAngle rotation =>
-            !isPrepared ? RotationAngle.Rotation0 : (RotationAngle)webCamTexture.videoRotationAngle;
-
-        private WebCamDevice? _webCamDevice;
 
         private WebCamDevice? webCamDevice
         {
@@ -226,7 +217,7 @@ namespace Mediapipe.Unity
 
         public override void Stop()
         {
-            if (webCamTexture != null)
+            if (webCamTexture)
             {
                 webCamTexture.Stop();
             }
@@ -291,11 +282,9 @@ namespace Mediapipe.Unity
 
                 if (a.height != b.height)
                 {
-                    // prefer smaller height
                     return a.height - b.height;
                 }
 
-                // prefer smaller frame rate
                 return (int)(a.frameRate - b.frameRate);
             }
         }

@@ -11,39 +11,40 @@ public class AvatarCameraController : MonoBehaviour
     public float distance = 7;
     public float scrollSpeed = 30;
     public float rotateSpeed = 30;
-    public bool isInputDisable = false;
+    public bool isInputDisable = true;
 
     public void StartControl()
     {
-        avatarTransform = avatar.gameObject.transform;
+        this.avatarTransform = avatar.gameObject.transform;
         transform.LookAt(avatarTransform.position);
-        offsetPosition = transform.position - avatarTransform.position;
+        this.offsetPosition = transform.position - avatarTransform.position;
+        this.isInputDisable = false;
     }
 
     private void Update()
     {
-        if (isInputDisable)
+        if ( this.isInputDisable)
         {
             return;
         }
-        transform.position = offsetPosition + avatarTransform.position;
-        RotateView();
-        ScrollViewMouse();
-        ScrollViewArrow();
+        transform.position =  this.offsetPosition +  this.avatarTransform.position;
+        this.RotateView();
+        this.ScrollViewMouse();
+        this.ScrollViewArrow();
     }
 
     private void ScrollViewArrow()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.RotateAround(avatarTransform.transform.position, Vector3.up, rotateSpeed * 5 * Time.deltaTime);
-            offsetPosition = transform.position - avatarTransform.transform.position;
+            transform.RotateAround( this.avatarTransform.transform.position, Vector3.up,  this.rotateSpeed * 5 * Time.deltaTime);
+            this.offsetPosition =  transform.position -  this.avatarTransform.transform.position;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.RotateAround(avatarTransform.transform.position, Vector3.up, -rotateSpeed * 5 * Time.deltaTime);
-            offsetPosition = transform.position - avatarTransform.transform.position;
+            transform.RotateAround( this.avatarTransform.transform.position, Vector3.up, -rotateSpeed * 5 * Time.deltaTime);
+            this.offsetPosition = transform.position - avatarTransform.transform.position;
         }
 
         if (Input.GetKey(KeyCode.UpArrow))

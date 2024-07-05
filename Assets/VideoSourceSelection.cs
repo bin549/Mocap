@@ -8,8 +8,10 @@ using UnityEngine.Video;
 public class VideoSourceSelection : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
+    public VideoClip[] videoClips;
     public VideoClip videoClip;
     public Button videoClipItem;
+    [SerializeField] private AvatarCameraController avatarCameraController;
 
     private void OnEnable()
     {
@@ -31,12 +33,13 @@ public class VideoSourceSelection : MonoBehaviour
         {
             this.UpdateVideoClip();
             this.gameObject.SetActive(false);
+            this.avatarCameraController.isInputDisable = false;
         });
     }
 
     public void UpdateVideoClip()
     {
-        videoPlayer.clip = videoClip;
+        this.videoPlayer.clip = videoClip;
     }
 
  private   void Update()

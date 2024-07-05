@@ -60,10 +60,6 @@ namespace Mediapipe.Unity.Sample
         public WebCamSource BuildWebCamSource()
         {
             return webCamSource;
-            // new WebCamSource(
-            //     _preferredDefaultWebCamWidth,
-            //     _defaultAvailableWebCamResolutions
-            // );
         }
 
         public VideoSource BuildVideoSource()

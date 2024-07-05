@@ -246,8 +246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 710506646}
+  videoClips: []
   videoClip: {fileID: 32900000, guid: 3cb14086fcf0344148db93aa69653db2, type: 3}
   videoClipItem: {fileID: 537338843}
+  avatarCameraController: {fileID: 1264297882}
 --- !u!1 &128706669
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &275874967
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d846393f8d9f20fa64b924b0d95e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultImageSource: 0
+  deviceSelection: {fileID: 1244952859}
   _preferableInferenceMode: 1
   _assetLoaderType: 0
   _logLevel: 5
@@ -621,7 +623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498146e99d4934673bd948c8be11227e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preferableDefaultWidth: 0
+  _preferableDefaultWidth: 1280
+  _webCamTexture: {fileID: 0}
 --- !u!1 &289369603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1383,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710506645}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 21d20fa211b0446c1ae3fd2b195516bf, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1402,7 +1405,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -1479,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &761721422
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2076,6 +2079,7 @@ MonoBehaviour:
   videoButton: {fileID: 492203347}
   uiManager: {fileID: 785387223}
   avatarCameraController: {fileID: 1264297882}
+  defaultImageSource: 0
 --- !u!1 &1250650595
 GameObject:
   m_ObjectHideFlags: 0
