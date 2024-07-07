@@ -13,7 +13,7 @@ public class UiManager : MonoBehaviour
     public GameObject mapSelectionPanel;
     public Button settingsButton;
     public GameObject settingsPanel;
-    public GameObject deviceSelectionPanel;
+    public DeviceSelection deviceSelection;
     [SerializeField] private AvatarCameraController _avatarCameraController;
     public RawImage screen;
 
@@ -51,12 +51,12 @@ public class UiManager : MonoBehaviour
 
     public void ToggleUI()
     {
-        deviceSelectionPanel.SetActive(!deviceSelectionPanel.activeSelf);
+        deviceSelection.gameObject.SetActive(!deviceSelection.gameObject.activeSelf);
         foreach (var uiPanel in uiPanels)
         {
-            uiPanel.SetActive(!deviceSelectionPanel.activeSelf);
+            uiPanel.SetActive(!deviceSelection.gameObject.activeSelf);
         }
-        if (deviceSelectionPanel.activeSelf)
+        if (deviceSelection.gameObject.activeSelf)
         {
             videoSourceSelection.videoPlayer.Pause();
         }

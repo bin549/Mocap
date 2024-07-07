@@ -35,7 +35,6 @@ public class FolderUtils : MonoBehaviour
         {
             directory = Environment.CurrentDirectory;
         }
-
         DirectoryInfo mydir = new DirectoryInfo(directory);
         FileInfo[] f = mydir.GetFiles();
         List<FileInfo> f2 = new List<FileInfo>();
@@ -47,7 +46,6 @@ public class FolderUtils : MonoBehaviour
                 if (file.Extension.Equals(extension))
                 {
                     f2.Add(file);
-                    continue;
                 }
             }
         }

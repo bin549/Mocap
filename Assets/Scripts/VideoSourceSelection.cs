@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -8,12 +5,11 @@ using UnityEngine.Video;
 public class VideoSourceSelection : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public VideoClip[] videoClips;
-    public VideoClip videoClip;
-    public Button videoClipItem;
+    public GameObject videoClipItem;
     [SerializeField] private AvatarCameraController avatarCameraController;
     [SerializeField] private UiManager _uiManager;
-
+    [SerializeField] private AppSettings _appSettings;
+    
     private void OnEnable()
     {
         this.videoPlayer.Pause();
@@ -32,16 +28,31 @@ public class VideoSourceSelection : MonoBehaviour
 
     private void Start()
     {
-        this.videoClipItem.onClick.AddListener(() =>
+        foreach (var videoPath in this.GetVideos())
         {
-            this.UpdateVideoClip();
-            this.gameObject.SetActive(false);
-            this.avatarCameraController.isInputDisable = false;
-        });
+            VideoClipItem videoClip = GameObject.Instantiate(videoClipItem).GetComponent<VideoClipItem>();
+            videoClip.gameObject.transform.SetParent(transform);
+            videoClip.SetVideoClipSource(videoPath);
+            videoClip.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                if (!_appSettings.isAppBoot)
+                {
+                    _appSettings.isAppBoot = true;
+                    _uiManager.deviceSelection.OnAppBoot();
+                } 
+                videoClip.OnVideoPlayerSourceUpdate(this.videoPlayer);
+                this.gameObject.SetActive(false);
+                this.avatarCameraController.isInputDisable = false;
+            });
+        }
     }
-
-    public void UpdateVideoClip()
+    
+    public string[] GetVideos()
     {
-        this.videoPlayer.clip = videoClip;
+        string[] extensions = new string[]
+        {
+            ".mp4", ".mov"
+        };
+        return FolderUtils.GetFilterdFiles(_appSettings.GetVideosFolderPath() + "/Videos", extensions);
     }
 }

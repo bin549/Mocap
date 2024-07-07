@@ -19,6 +19,7 @@ public class AppSettings : MonoBehaviour
     public GameObject[] avatarModels;
     private VideoSource _videoSource;
     [SerializeField] private Camera viewCamera;
+    public bool isAppBoot = false;
     
     private void Awake()
     {
@@ -100,16 +101,6 @@ public class AppSettings : MonoBehaviour
         return FolderUtils.GetFilterdFiles(modelsFolderPath, extensions);
     }
     
-    public string[] GetVideos()
-    {
-        string[] extensions = new string[]
-        {
-            ".mp4", ".mov"
-        };
-        //var paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false);
-        //SelectFolder();
-        return FolderUtils.GetFilterdFiles(videosFolderPath, extensions);
-    }
     
     public string GetModelsFolderPath()
     {
@@ -138,6 +129,8 @@ public class AppSettings : MonoBehaviour
             modelsFolderPath = path;
         }
     }
+    
+    
     
     public void SetSavedFolderPath()
     {

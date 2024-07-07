@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Mediapipe.Unity.Sample;
 using Mediapipe.Unity.Sample.PoseTracking;
 using UnityEngine;
@@ -14,25 +12,40 @@ public class DeviceSelection : MonoBehaviour
     [SerializeField] private UiManager uiManager;
     public AvatarCameraController avatarCameraController;
     public ImageSourceType defaultImageSource;
-    public GameObject selectedModel;
+    public GameObject selectedAvatar;
     
     private void Start()
     {
         webcamButton.onClick.AddListener(() =>
         {
-            this.OnDeviceSelected(ImageSourceType.WebCamera);
+            this.OnDeviceWebcamSelected(ImageSourceType.WebCamera);
         });
         videoButton.onClick.AddListener(() =>
         {
-            this.OnDeviceSelected(ImageSourceType.Video);
+            this.OnDeviceVideoSelected(ImageSourceType.Video);
         });
     }
 
-    private void OnDeviceSelected(ImageSourceType deviceType)
+    private void OnDeviceWebcamSelected(ImageSourceType deviceType)
     {
-        selectedModel.SetActive(true);
+        selectedAvatar.SetActive(true);
         defaultImageSource = deviceType;
         uiManager.ToggleUI();
+        avatarCameraController.StartControl();
+        solution.gameObject.SetActive(true);
+    }
+    
+    private void OnDeviceVideoSelected(ImageSourceType deviceType)
+    {
+        uiManager.ToggleUI();
+        uiManager.videoSourceSelection.gameObject.SetActive(true);
+        defaultImageSource = ImageSourceType.Video;
+    }
+    
+    
+    public void OnAppBoot()
+    {
+        selectedAvatar.SetActive(true);
         avatarCameraController.StartControl();
         solution.gameObject.SetActive(true);
     }
