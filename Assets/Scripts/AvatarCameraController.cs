@@ -21,6 +21,11 @@ public class AvatarCameraController : MonoBehaviour
         this.isInputDisable = false;
     }
 
+    public void SetAvatar(Transform avatar)
+    {
+        this.avatarTransform = avatar;
+    }
+    
     private void Update()
     {
         if ( this.isInputDisable)

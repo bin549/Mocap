@@ -7,19 +7,41 @@ using UnityEngine.Video;
 
 public class MapSelection : MonoBehaviour
 {
-    [SerializeField] private GameObject sceneOne;
-    [SerializeField] private GameObject sceneTwo;
-    [SerializeField] private Button sceneOneButton;
-    [SerializeField] private Button sceneTwoButton;
-    [SerializeField] private Material sceneOneMaterial;
-    [SerializeField] private Material sceneTwoMaterial;
-    [SerializeField] private Light sceneOneLight;
-    [SerializeField] private Light sceneTwoLight;
+    [SerializeField] private GameObject currentScene;
+    [SerializeField] private GameObject currentMapLight;
+    [SerializeField] private Transform lightPivot;
+    [SerializeField] private Transform mapPivot;
 
     [SerializeField] private AvatarCameraController avatarCameraController;
     public VideoPlayer videoPlayer;
     [SerializeField] private UiManager _uiManager;
-    
+    [SerializeField] private GameObject mapItem;
+    [SerializeField] private MapUnit[] _mapUnits;
+
+    private void Start()
+    {
+        foreach (var mapUnit in _mapUnits)
+        {
+            MapItem map = GameObject.Instantiate(mapItem).GetComponent<MapItem>();
+            map.gameObject.transform.SetParent(transform);
+            Button mapButton = map.gameObject.GetComponent<Button>();
+            mapButton.image.sprite = mapUnit.sprite;
+            mapButton.onClick.AddListener(() =>
+            {
+                GameObject.Destroy(currentScene);
+                GameObject.Destroy(currentMapLight);
+                currentScene = GameObject.Instantiate(mapUnit.map);
+                currentScene.transform.SetParent(mapPivot);
+                currentScene.transform.position = new Vector3(0, 0, 0);
+                currentMapLight = GameObject.Instantiate(mapUnit.mapLight);
+                currentMapLight.transform.SetParent(lightPivot);
+                RenderSettings.skybox = mapUnit.skyMaterial;
+                this.avatarCameraController.isInputDisable = false;
+                gameObject.SetActive(false);
+            });
+        }
+    }
+
     private void OnEnable()
     {
         this.videoPlayer.Pause();
@@ -36,31 +58,5 @@ public class MapSelection : MonoBehaviour
 
         this.videoPlayer.Play();
         _uiManager.screen.gameObject.SetActive(true);
-    }
-
-
-    private void Start()
-    {
-        sceneOneButton.onClick.AddListener(() =>
-        {
-            sceneOne.SetActive(true);
-            sceneTwo.SetActive(false);
-            gameObject.SetActive(false);
-            sceneOneLight.gameObject.SetActive(true);
-            sceneTwoLight.gameObject.SetActive(false);
-            RenderSettings.skybox = sceneOneMaterial;
-            // RenderSettings.subtractiveShadowColor = Color.cyan;
-            this.avatarCameraController.isInputDisable = false;
-        });
-        sceneTwoButton.onClick.AddListener(() =>
-        {
-            sceneOne.SetActive(false);
-            sceneTwo.SetActive(true);
-            gameObject.SetActive(false);
-            sceneOneLight.gameObject.SetActive(false);
-            sceneTwoLight.gameObject.SetActive(true);
-            RenderSettings.skybox = sceneTwoMaterial;
-            this.avatarCameraController.isInputDisable = false;
-        });
     }
 }
