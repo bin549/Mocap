@@ -51,7 +51,10 @@ public class UiManager : MonoBehaviour
 
     public void ToggleUI()
     {
-        deviceSelection.gameObject.SetActive(!deviceSelection.gameObject.activeSelf);
+        if (deviceSelection.defaultImageSource == ImageSourceType.WebCamera)
+        {
+            deviceSelection.gameObject.SetActive(!deviceSelection.gameObject.activeSelf);
+        }
         foreach (var uiPanel in uiPanels)
         {
             uiPanel.SetActive(!deviceSelection.gameObject.activeSelf);

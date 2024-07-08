@@ -33,13 +33,14 @@ public class DeviceSelection : MonoBehaviour
         uiManager.ToggleUI();
         avatarCameraController.StartControl();
         solution.gameObject.SetActive(true);
+        uiManager.videoSourceSelectionButton.gameObject.SetActive(false);
     }
     
     private void OnDeviceVideoSelected(ImageSourceType deviceType)
     {
-        uiManager.ToggleUI();
         uiManager.videoSourceSelection.gameObject.SetActive(true);
         defaultImageSource = ImageSourceType.Video;
+        gameObject.SetActive(false);
     }
     
     

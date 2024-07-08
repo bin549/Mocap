@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Map Unit 02
   m_EditorClassIdentifier: 
   map: {fileID: 9089856348231297829, guid: dfc25db8548e7451eaf4dcb8d0dcd14d, type: 3}
-  sprite: {fileID: 21300000, guid: 13116b7cdbfa5624aa304d37388ab392, type: 3}
+  sprite: {fileID: 21300000, guid: df97f888d0ce14fd28b2b20f883ff73e, type: 3}
   skyMaterial: {fileID: 2100000, guid: 6de3b18bb00cc1b4a8edb47f4eb9f643, type: 2}
   mapLight: {fileID: 5994216909446666351, guid: 56dc7a8f4ca954049a8c706ddf712614,
     type: 3}

@@ -38,6 +38,7 @@ public class VideoSourceSelection : MonoBehaviour
                 if (!_appSettings.isAppBoot)
                 {
                     _appSettings.isAppBoot = true;
+                    _uiManager.ToggleUI();
                     _uiManager.deviceSelection.OnAppBoot();
                 } 
                 videoClip.OnVideoPlayerSourceUpdate(this.videoPlayer);
