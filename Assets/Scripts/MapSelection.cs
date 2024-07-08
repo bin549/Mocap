@@ -32,7 +32,6 @@ public class MapSelection : MonoBehaviour
                 GameObject.Destroy(currentMapLight);
                 currentScene = GameObject.Instantiate(mapUnit.map);
                 currentScene.transform.SetParent(mapPivot);
-                currentScene.transform.position = new Vector3(0, 0, 0);
                 currentMapLight = GameObject.Instantiate(mapUnit.mapLight);
                 currentMapLight.transform.SetParent(lightPivot);
                 RenderSettings.skybox = mapUnit.skyMaterial;
