@@ -13,17 +13,11 @@ public class DeviceSelection : MonoBehaviour
     public AvatarCameraController avatarCameraController;
     public ImageSourceType defaultImageSource;
     public GameObject selectedAvatar;
-    
+
     private void Start()
     {
-        webcamButton.onClick.AddListener(() =>
-        {
-            this.OnDeviceWebcamSelected(ImageSourceType.WebCamera);
-        });
-        videoButton.onClick.AddListener(() =>
-        {
-            this.OnDeviceVideoSelected(ImageSourceType.Video);
-        });
+        webcamButton.onClick.AddListener(() => { this.OnDeviceWebcamSelected(ImageSourceType.WebCamera); });
+        videoButton.onClick.AddListener(() => { this.OnDeviceVideoSelected(ImageSourceType.Video); });
     }
 
     private void OnDeviceWebcamSelected(ImageSourceType deviceType)
@@ -35,19 +29,25 @@ public class DeviceSelection : MonoBehaviour
         solution.gameObject.SetActive(true);
         uiManager.videoSourceSelectionButton.gameObject.SetActive(false);
     }
-    
+
     private void OnDeviceVideoSelected(ImageSourceType deviceType)
     {
         uiManager.videoSourceSelection.gameObject.SetActive(true);
         defaultImageSource = ImageSourceType.Video;
         gameObject.SetActive(false);
+        this.OnAppInit();
     }
     
-    
+
+    public void OnAppInit()
+    {
+        solution.gameObject.SetActive(true);
+    }
+
+
     public void OnAppBoot()
     {
         selectedAvatar.SetActive(true);
         avatarCameraController.StartControl();
-        solution.gameObject.SetActive(true);
     }
 }
