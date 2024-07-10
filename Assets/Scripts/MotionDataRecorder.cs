@@ -40,7 +40,7 @@ public class MotionDataRecorder : MonoBehaviour
             return;
         }
 
-        _poseHandler = new HumanPoseHandler(_animator.avatar, _animator.transform);
+        this._poseHandler = new HumanPoseHandler(_animator.avatar, _animator.transform);
     }
 
     private void LateUpdate()
@@ -280,5 +280,7 @@ string path = Application.dataPath + @"/Resources";
     public void SetAnimator(Animator animator)
     {
         this._animator = animator;
+        this._poseHandler = new HumanPoseHandler(_animator.avatar, _animator.transform);
+        
     }
 }
