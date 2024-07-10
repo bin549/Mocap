@@ -1,4 +1,3 @@
-using System;
 using Mediapipe.Unity.Sample.PoseTracking;
 using UnityEngine;
 using UnityEngine.UI;
