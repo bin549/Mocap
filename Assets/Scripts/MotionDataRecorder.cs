@@ -276,4 +276,9 @@ string path = Application.dataPath + @"/Resources";
             return humanId;
         }
     }
+
+    public void SetAnimator(Animator animator)
+    {
+        this._animator = animator;
+    }
 }

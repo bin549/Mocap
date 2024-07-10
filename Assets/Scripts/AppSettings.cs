@@ -20,6 +20,7 @@ public class AppSettings : MonoBehaviour
     private VideoSource _videoSource;
     [SerializeField] private Camera viewCamera;
     public bool isAppBoot = false;
+    public MotionDataRecorder motionDataRecorder;
     
     private void Awake()
     {

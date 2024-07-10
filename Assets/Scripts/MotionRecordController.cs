@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class RecordController : MonoBehaviour
 {
-    [SerializeField] private MotionDataRecorder motionDataRecorder;
-    
+    [SerializeField] private AppSettings appSettings;
+    [SerializeField] private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -26,15 +32,17 @@ public class RecordController : MonoBehaviour
 
     private void UnityAnimRecording()
     {
-        if (!motionDataRecorder.isRecording)
+        if (!appSettings.motionDataRecorder.isRecording)
         {
-            motionDataRecorder.RecordStart();
+            _animator.SetBool("isRecording", true);
+            appSettings.motionDataRecorder.RecordStart();
         }
         else
         {
             try
             {
-                motionDataRecorder.RecordEnd();
+                appSettings.motionDataRecorder.RecordEnd();
+                _animator.SetBool("isRecording", false);
             }
             catch (System.Exception e)
             {

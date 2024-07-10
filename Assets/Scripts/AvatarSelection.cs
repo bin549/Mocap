@@ -1,3 +1,4 @@
+using System;
 using Mediapipe.Unity.Sample.PoseTracking;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class AvatarSelection : MonoBehaviour
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private AvatarUnit[] _avatarUnits;
     [SerializeField] private Transform avatarPivot;
+    [SerializeField] private AppSettings _appSettings;
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class AvatarSelection : MonoBehaviour
                 GameObject.Destroy(currentAvatar);
                 currentAvatar = GameObject.Instantiate(avatarUnit.avatar);
                 currentAvatar.transform.SetParent(avatarPivot);
+                _appSettings.motionDataRecorder.SetAnimator(currentAvatar.GetComponent<Animator>());
                 currentAvatar.SetActive(true);
                 solution.SetAvatar(currentAvatar.GetComponent<Mediapipe2UnitySkeletonController>());
                 this.avatarCameraController.SetAvatar(currentAvatar.transform);
