@@ -1735,6 +1735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418456206}
   - component: {fileID: 1418456207}
+  - component: {fileID: 1418456208}
   m_Layer: 0
   m_Name: AppSettings
   m_TagString: Untagged
@@ -1779,6 +1780,27 @@ MonoBehaviour:
   avatarModels: []
   viewCamera: {fileID: 1377356975}
   isAppBoot: 0
+--- !u!114 &1418456208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418456205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c9761b2c4854d3e846a4e15eb56383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 95690986487887856}
+  recording: 0
+  FrameIndex: 0
+  _rootBoneSystem: 1
+  _targetRootBone: 0
+  IK_LeftFootBone: 5
+  IK_RightFootBone: 6
+  avatar: {fileID: 9000000, guid: 7b39edff83eba6b48b1ddca7800ad290, type: 3}
+  TargetFPS: 60
 --- !u!1 &1449396712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,8 +2238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 101}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 263}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705805451
 MonoBehaviour:
@@ -2767,6 +2789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e27455d9ff446caac37fa641c25946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &95690986487887856 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1426251493578144204, guid: c26d4b1c45e704ccb920246e04152fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7304458065947532917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &118210523444144353
 CanvasRenderer:
   m_ObjectHideFlags: 0

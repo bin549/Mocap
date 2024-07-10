@@ -10,7 +10,7 @@ using UnityEditor;
 public class MotionDataRecorder : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] public bool recording;
+    [SerializeField] public bool isRecording;
     [SerializeField] protected int FrameIndex;
 
     [SerializeField]
@@ -32,18 +32,8 @@ public class MotionDataRecorder : MonoBehaviour
 
     public float TargetFPS = 60.0f;
 
-
-    [SerializeField] private AppSettings appSettings;
-
-    private void Awake()
-    {
-        appSettings = GameObject.FindObjectOfType<AppSettings>();
-    }
-
     private void Start()
     {
-        avatar = appSettings.GetAvatar();
-        _animator = appSettings.GetAvatarAnimator();
         if (_animator == null)
         {
             Destroy(this);
@@ -55,7 +45,7 @@ public class MotionDataRecorder : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!recording)
+        if (!isRecording)
         {
             return;
         }
@@ -130,7 +120,7 @@ public class MotionDataRecorder : MonoBehaviour
 
     public void RecordStart()
     {
-        if (recording)
+        if (isRecording)
         {
             return;
         }
@@ -142,7 +132,7 @@ public class MotionDataRecorder : MonoBehaviour
         }
 
         OnRecordEnd += WriteAnimationFile;
-        recording = true;
+        isRecording = true;
         RecordedTime = 0f;
         StartTime = Time.time;
         FrameIndex = 0;
@@ -150,7 +140,7 @@ public class MotionDataRecorder : MonoBehaviour
 
     public void RecordEnd()
     {
-        if (!recording)
+        if (!isRecording)
         {
             return;
         }
@@ -161,7 +151,7 @@ public class MotionDataRecorder : MonoBehaviour
         }
 
         OnRecordEnd -= WriteAnimationFile;
-        recording = false;
+        isRecording = false;
     }
 
     private static void SetHumanBoneTransformToHumanoidPoses(Animator animator,

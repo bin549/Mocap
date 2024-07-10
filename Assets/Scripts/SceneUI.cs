@@ -78,7 +78,7 @@ public class SceneUI : MonoBehaviour
         msg = "";
         if (!isBVHRecorder.isOn)
         {
-            if (!motionDataRecorder.recording)
+            if (!motionDataRecorder.isRecording)
             {
                 recordButtonAnimator.SetBool("isRecording", true);
                 motionDataRecorder.RecordStart();
