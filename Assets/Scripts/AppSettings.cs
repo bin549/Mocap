@@ -130,8 +130,6 @@ public class AppSettings : MonoBehaviour
         }
     }
     
-    
-    
     public void SetSavedFolderPath()
     {
         var path = FolderUtils.SelectFolder();

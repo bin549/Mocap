@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -6,43 +7,62 @@ public class VideoClipItem : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
     public string videoClipPath;
-    public VideoClip videoClip;
     private RenderTexture videoTexture;
-    public float sourceFps = 30f;
-    public Image textureImage;
+    public RawImage textureImage;
+    private UnityAction<Texture2D> OnComplete;
+    private int frameValue = 1;
 
     private void Awake()
     {
         videoPlayer = GetComponent<VideoPlayer>();
-        textureImage = GetComponent<Image>();
+        textureImage = GetComponent<RawImage>();
     }
 
     public void SetVideoClipSource(string clipPath)
     {
         this.videoClipPath = clipPath;
-        videoPlayer.url = clipPath;
-        // VideoClip vclip = (VideoClip)Resources.Load(videoClipPath);
-        if (videoPlayer.clip != null)
+        this.GetOneFrameTexture((texture2D) =>
         {
-            if (videoPlayer.clip.width == 0 || videoPlayer.clip.height == 0)
-            {
-                videoTexture = new RenderTexture(1920, 1080, 24);
-            }
-            else
-            {
-                videoTexture = new RenderTexture((int)videoPlayer.clip.width, (int)videoPlayer.clip.height, 24);
-            }
+            textureImage.texture = texture2D;
+        });
+    }
+
+    private void GetOneFrameTexture(UnityAction<Texture2D> onComplete)
+    {
+        if (!string.IsNullOrEmpty(this.videoClipPath))
+        {
+            videoPlayer.url = this.videoClipPath;
         }
-        else
-        {
-            videoTexture = new RenderTexture(1920, 1080, 24);
-        }   
+        OnComplete = onComplete;
+        videoPlayer.waitForFirstFrame = true;
+        videoPlayer.sendFrameReadyEvents = true;
+        videoPlayer.frameReady += frameReady;
         videoPlayer.Play();
-        videoPlayer.renderMode = VideoRenderMode.RenderTexture;
-        videoPlayer.targetTexture = videoTexture;
-        videoPlayer.Prepare();
-        sourceFps = (float)videoPlayer.frameRate;
-        videoPlayer.Pause();
+    }
+
+    private void frameReady(VideoPlayer source, long frameIdx)
+    {
+        frameValue++;
+    Debug.Log(frameValue);
+        if (frameValue >= 1)
+        {
+            OnComplete?.Invoke(TextureToTexture2D(source.texture));
+            videoPlayer.frameReady -= frameReady;
+            videoPlayer.sendFrameReadyEvents = false;
+            videoPlayer.Stop();
+        }
+    }
+
+    private Texture2D TextureToTexture2D(Texture texture)
+    {
+        Texture2D texture2D = new Texture2D(texture.width, texture.height, TextureFormat.RGBA32, false);
+        RenderTexture renderTexture = RenderTexture.GetTemporary(texture.width, texture.height);
+        Graphics.Blit(texture, renderTexture);
+        RenderTexture.active = renderTexture;
+        texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+        texture2D.Apply();
+        RenderTexture.ReleaseTemporary(renderTexture);
+        return texture2D;
     }
 
     public void OnVideoPlayerSourceUpdate(VideoPlayer videoPlayer)
