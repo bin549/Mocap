@@ -5,8 +5,7 @@ namespace Mediapipe.Unity
   public class AutoFit : MonoBehaviour
   {
     [System.Serializable]
-    public enum FitMode
-    {
+    public enum FitMode {
       Expand,
       Shrink,
       FitWidth,
@@ -15,8 +14,7 @@ namespace Mediapipe.Unity
 
     [SerializeField] private FitMode _fitMode;
 
-    private void LateUpdate()
-    {
+    private void LateUpdate() {
       var rectTransform = GetComponent<RectTransform>();
       if (rectTransform.rect.width == 0 || rectTransform.rect.height == 0)
       {
@@ -42,8 +40,7 @@ namespace Mediapipe.Unity
       rectTransform.offsetMax *= ratio;
     }
 
-    private (float, float) GetBoundingBoxSize(RectTransform rectTransform)
-    {
+    private (float, float) GetBoundingBoxSize(RectTransform rectTransform) {
       var rect = rectTransform.rect;
       var center = rect.center;
       var topLeftRel = new Vector2(rect.xMin - center.x, rect.yMin - center.y);

@@ -3,8 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(VideoPlayer))]
-public class VideoCapture : MonoBehaviour
-{
+public class VideoCapture : MonoBehaviour {
     public RawImage[] rawImages;
     public float scale = 1;
     public bool useWebCam = true;
@@ -22,8 +21,7 @@ public class VideoCapture : MonoBehaviour
     public AppSettings appSettings;
     public bool isScale;
 
-    private void Awake()
-    {
+    private void Awake() {
         //      rawImages = GameObject.FindObjectsOfType<RawImage>();
         videoPlayer = this.GetComponent<VideoPlayer>();
         videoPlayer.url = PlayerPrefs.GetString("video_url", "");
@@ -31,10 +29,8 @@ public class VideoCapture : MonoBehaviour
         appSettings = GameObject.FindObjectOfType<AppSettings>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             rawImages[rawImagesIndex].gameObject.SetActive(false);
             rawImagesIndex++;
 
@@ -46,8 +42,7 @@ public class VideoCapture : MonoBehaviour
             rawImages[rawImagesIndex].gameObject.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
+        if (Input.GetKeyDown(KeyCode.X)) {
             if (!isScale)
             {
                 videoPlayer.aspectRatio = VideoAspectRatio.FitHorizontally;
@@ -61,33 +56,27 @@ public class VideoCapture : MonoBehaviour
         }
     }
 
-    public void Initialize(int width, int height)
-    {
+    public void Initialize(int width, int height) {
         this.width = width;
         this.height = height;
 
-        if (useWebCam)
-        {
+        if (useWebCam) {
             PlayWebCamera();
         }
-        else
-        {
+        else {
             PlayVideo();
         }
     }
 
-    private void PlayWebCamera()
-    {
+    private void PlayWebCamera() {
         WebCamDevice[] devices = WebCamTexture.devices;
-        if (devices.Length <= webCamIndex)
-        {
+        if (devices.Length <= webCamIndex) {
             webCamIndex = 0;
         }
 
         webCamTexture = new WebCamTexture(devices[webCamIndex].name);
 
-        foreach (RawImage rawImage in rawImages)
-        {
+        foreach (RawImage rawImage in rawImages) {
             RectTransform rectTransform = rawImage.GetComponent<RectTransform>();
             rawImage.texture = webCamTexture;
             rawImage.gameObject.SetActive(false);
@@ -102,11 +91,9 @@ public class VideoCapture : MonoBehaviour
         InitializeTexture();
     }
 
-    private void PlayVideo()
-    {
+    private void PlayVideo() {
         VideoClip vclip = (VideoClip)Resources.Load(videoPlayer.url);
-        if (vclip != null)
-        {
+        if (vclip != null) {
             if ((int)vclip.width == 0 || (int)vclip.height == 0)
             {
                 videoTexture = new RenderTexture(1920, 1080, 24);
@@ -116,16 +103,14 @@ public class VideoCapture : MonoBehaviour
                 videoTexture = new RenderTexture((int)vclip.width, (int)vclip.height, 24);
             }
         }
-        else
-        {
+        else {
             videoTexture = new RenderTexture(1920, 1080, 24);
         }
 
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = videoTexture;
 
-        foreach (RawImage rawImage in rawImages)
-        {
+        foreach (RawImage rawImage in rawImages) {
             RectTransform rectTransform = rawImage.GetComponent<RectTransform>();
             rawImage.texture = videoTexture;
             rawImage.gameObject.SetActive(false);
@@ -142,10 +127,8 @@ public class VideoCapture : MonoBehaviour
         InitializeTexture();
     }
 
-    private void InitializeTexture()
-    {
+    private void InitializeTexture() {
         GameObject go = new GameObject("Camera", typeof(Camera));
-
         go.transform.parent = this.transform;
         go.transform.localScale = new Vector3(-1, -1, 1);
         go.transform.localPosition = new Vector3(0, 0, -2);
@@ -164,8 +147,7 @@ public class VideoCapture : MonoBehaviour
         camera.allowMSAA = false;
         camera.allowHDR = false;
 
-        renderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.RGB565, RenderTextureReadWrite.sRGB)
-        {
+        renderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.RGB565, RenderTextureReadWrite.sRGB) {
             useMipMap = false,
             autoGenerateMips = false,
             wrapMode = TextureWrapMode.Clamp,

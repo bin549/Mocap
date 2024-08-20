@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class AvatarSelection : MonoBehaviour
-{
+public class AvatarSelection : MonoBehaviour {
     public GameObject currentAvatar;
     public PoseTrackingSolution solution;
     public GameObject avatarItem;
@@ -15,16 +14,13 @@ public class AvatarSelection : MonoBehaviour
     [SerializeField] private Transform avatarPivot;
     [SerializeField] private AppSettings _appSettings;
 
-    private void Start()
-    {
-        foreach (var avatarUnit in _avatarUnits)
-        {
+    private void Start() {
+        foreach (var avatarUnit in _avatarUnits) {
             AvatarItem avatar = GameObject.Instantiate(avatarItem).GetComponent<AvatarItem>();
             avatar.gameObject.transform.SetParent(transform);
             Button avatarButton = avatar.gameObject.GetComponent<Button>();
             avatarButton.image.sprite = avatarUnit.sprite;
-            avatarButton.onClick.AddListener(() =>
-            {
+            avatarButton.onClick.AddListener(() => {
                 GameObject.Destroy(currentAvatar);
                 currentAvatar = GameObject.Instantiate(avatarUnit.avatar);
                 currentAvatar.transform.SetParent(avatarPivot);
@@ -38,17 +34,14 @@ public class AvatarSelection : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         this.videoPlayer.Pause();
         _uiManager.screen.gameObject.SetActive(false);
     }
 
 
-    private void OnDisable()
-    {
-        if (!this.videoPlayer)
-        {
+    private void OnDisable() {
+        if (!this.videoPlayer) {
             return;
         }
 

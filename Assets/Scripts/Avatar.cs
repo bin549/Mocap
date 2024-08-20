@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Avatar : MonoBehaviour
-{
+public class Avatar : MonoBehaviour {
     public bool showSkeleton;
     public Material skeletonMaterial;
     public float skeletonX;
@@ -22,35 +21,29 @@ public class Avatar : MonoBehaviour
     private float zScale = 1;
 
 
-    private void Awake()
-    {
+    private void Awake() {
         skeleton = new GameObject("Skeleton");
         animator = this.GetComponent<Animator>();
         // appSettings = GameObject.FindObjectOfType<AppSettings>();
         Initialize();
     }
 
-    private void Update()
-    {
+    private void Update() {
         // PoseUpdate();
     }
 
-    public Animator GetAnimator()
-    {
-        if (animator != null)
-        {
+    public Animator GetAnimator() {
+        if (animator != null) {
             return animator;
         }
 
         return null;
     }
 
-    public void Initialize()
-    {
+    public void Initialize() {
         // showSkeleton = appSettings.showSkeleton;
         jointPoints = new JointPoint[PositionIndex.Count.Int()];
-        for (int i = 0; i < PositionIndex.Count.Int(); i++)
-        {
+        for (int i = 0; i < PositionIndex.Count.Int(); i++) {
             jointPoints[i] = new JointPoint();
         }
 
@@ -135,8 +128,7 @@ public class Avatar : MonoBehaviour
         jointPoints[PositionIndex.Neck.Int()].child = jointPoints[PositionIndex.Head.Int()];
         //jointPoints[PositionIndex.Head.Int()].child = jointPoints[PositionIndex.Nose.Int()];
 
-        if (showSkeleton)
-        {
+        if (showSkeleton) {
             // Line child settings.
 
             // Right arm.
@@ -236,8 +228,7 @@ public class Avatar : MonoBehaviour
         // jointPoints[PositionIndex.Spine.Int()].score3D = 1f;
     }
 
-    public void PoseUpdate()
-    {
+    public void PoseUpdate() {
         // Calculate movement range of z-coordinate from height.
         float t1 = Vector3.Distance(jointPoints[PositionIndex.Head.Int()].pos3D,
             jointPoints[PositionIndex.Neck.Int()].pos3D);
@@ -262,8 +253,7 @@ public class Avatar : MonoBehaviour
         tall = t * 0.7f + prevTall * 0.3f;
         prevTall = tall;
 
-        if (tall == 0)
-        {
+        if (tall == 0) {
             tall = centerTall;
         }
 
@@ -280,8 +270,7 @@ public class Avatar : MonoBehaviour
                                                                   jointPoints[PositionIndex.Hip.Int()].inverseRotation;
 
         // Rotate each of the bones.
-        foreach (JointPoint jointPoint in jointPoints)
-        {
+        foreach (JointPoint jointPoint in jointPoints) {
             if (jointPoint.parent != null)
             {
                 Vector3 fv = jointPoint.parent.pos3D - jointPoint.pos3D;
@@ -321,8 +310,7 @@ public class Avatar : MonoBehaviour
                 jointPoints[PositionIndex.RightThumb2.Int()].pos3D - jointPoints[PositionIndex.RightMid1.Int()].pos3D,
                 rf) * rHand.inverseRotation;
 
-        foreach (Skeleton sk in skeletons)
-        {
+        foreach (Skeleton sk in skeletons) {
             JointPoint s = sk.start;
             JointPoint e = sk.end;
 
@@ -335,26 +323,21 @@ public class Avatar : MonoBehaviour
         }
     }
 
-    private Vector3 TriangleNormal(Vector3 a, Vector3 b, Vector3 c)
-    {
+    private Vector3 TriangleNormal(Vector3 a, Vector3 b, Vector3 c) {
         Vector3 d1 = a - b;
         Vector3 d2 = a - c;
-
         Vector3 dd = Vector3.Cross(d1, d2);
         dd.Normalize();
 
         return dd;
     }
 
-    private Quaternion GetInverse(JointPoint p1, JointPoint p2, Vector3 forward)
-    {
+    private Quaternion GetInverse(JointPoint p1, JointPoint p2, Vector3 forward) {
         return Quaternion.Inverse(Quaternion.LookRotation(p1.transform.position - p2.transform.position, forward));
     }
 
-    private void AddSkeleton(PositionIndex s, PositionIndex e)
-    {
-        Skeleton sk = new Skeleton()
-        {
+    private void AddSkeleton(PositionIndex s, PositionIndex e) {
+        Skeleton sk = new Skeleton() {
             gameObject = new GameObject("Line"),
             start = jointPoints[s.Int()],
             end = jointPoints[e.Int()],

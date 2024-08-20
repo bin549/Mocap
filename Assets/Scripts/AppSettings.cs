@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public class AppSettings : MonoBehaviour
-{
+public class AppSettings : MonoBehaviour {
     private string videosFolderPath;
     private string modelsFolderPath;
     private string savedFolderPath;
@@ -20,10 +19,8 @@ public class AppSettings : MonoBehaviour
     public bool isAppBoot = false;
     public MotionDataRecorder motionDataRecorder;
     
-    private void Awake()
-    {
-        if (_Instance != null)
-        {
+    private void Awake() {
+        if (_Instance != null) {
             Destroy(gameObject);
             return;
         }
@@ -32,108 +29,86 @@ public class AppSettings : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.V)) {
             viewCamera.gameObject.SetActive(true);
         }
-        if (Input.GetKeyUp(KeyCode.V))
-        {
+        if (Input.GetKeyUp(KeyCode.V)) {
             viewCamera.gameObject.SetActive(false);
         }
     }
 
-    private void Start()
-    {
+    private void Start() {
         videosFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Videos");
         modelsFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Models");
         savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
-        if (string.IsNullOrEmpty(savedFolderPath))
-        {
+        if (string.IsNullOrEmpty(savedFolderPath)) {
             FolderUtils.SafeCreateDirectory(Application.dataPath + @"/Resources");
             savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
         }
     }
     
-    public void SetAvatar(Avatar avatar)
-    {
+    public void SetAvatar(Avatar avatar) {
         this.avatar = avatar;
     }
     
-    public Avatar GetAvatar()
-    {
-        if (avatar != null)
-        {
+    public Avatar GetAvatar() {
+        if (avatar != null) {
             return avatar;
         }
     
         return null;
     }
     
-    public Animator GetAvatarAnimator()
-    {
-        if (avatarAnimator != null)
-        {
+    public Animator GetAvatarAnimator() {
+        if (avatarAnimator != null) {
             return avatarAnimator;
         }
     
         return null;
     }
     
-    public void SetAvatarAnimator(Animator avatarAnimator)
-    {
+    public void SetAvatarAnimator(Animator avatarAnimator) {
         this.avatarAnimator = avatarAnimator;
     }
     
-    public string GetVideosFolderPath()
-    {
+    public string GetVideosFolderPath() {
         return videosFolderPath;
     }
     
-    public string[] GetModels()
-    {
-        string[] extensions = new string[]
-        {
+    public string[] GetModels() {
+        string[] extensions = new string[] {
             ".fbx", ".obj"
         };
         return FolderUtils.GetFilterdFiles(modelsFolderPath, extensions);
     }
     
     
-    public string GetModelsFolderPath()
-    {
+    public string GetModelsFolderPath() {
         return modelsFolderPath;
     }
     
-    public string GetSavedFolderPath()
-    {
+    public string GetSavedFolderPath() {
         return savedFolderPath;
     }
     
-    public void SetVideosFolderPath()
-    {
+    public void SetVideosFolderPath() {
         var path = FolderUtils.SelectFolder();
-        if (!string.IsNullOrEmpty(path))
-        {
+        if (!string.IsNullOrEmpty(path)) {
             videosFolderPath = path;
         }
     }
     
-    public void SetModelsFolderPath()
-    {
+    public void SetModelsFolderPath() {
         var path = FolderUtils.SelectFolder();
-        if (!string.IsNullOrEmpty(path))
-        {
+        if (!string.IsNullOrEmpty(path)) {
             modelsFolderPath = path;
         }
     }
     
-    public void SetSavedFolderPath()
-    {
+    public void SetSavedFolderPath() {
         var path = FolderUtils.SelectFolder();
-        if (!string.IsNullOrEmpty(path))
-        {
+        if (!string.IsNullOrEmpty(path)) {
             savedFolderPath = path;
         }
     }

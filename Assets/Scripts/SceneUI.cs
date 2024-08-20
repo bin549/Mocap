@@ -4,8 +4,7 @@ using System;
 using System.IO;
 
 [DefaultExecutionOrder(32001)]
-public class SceneUI : MonoBehaviour
-{
+public class SceneUI : MonoBehaviour {
     [SerializeField] private Button btnVideoSelect;
     [SerializeField] private MotionDataRecorder motionDataRecorder;
     [SerializeField] private BVHRecorder bvhRecorder;
@@ -21,8 +20,7 @@ public class SceneUI : MonoBehaviour
     string msg = "";
     [SerializeField] private AppSettings appSettings;
 
-    private void Awake()
-    {
+    private void Awake() {
         appSettings = GameObject.FindObjectOfType<AppSettings>();
         motionDataRecorder = GameObject.FindObjectOfType<MotionDataRecorder>();
         UIComponents = GameObject.Find("UIComponents");
@@ -31,8 +29,7 @@ public class SceneUI : MonoBehaviour
         isBVHRecorder = GameObject.Find("isBVHRecorder").GetComponent<Toggle>();
     }
 
-    private void Start()
-    {
+    private void Start() {
         appSettings = GameObject.FindObjectOfType<AppSettings>();
         avatar = appSettings.GetAvatar();
         avatarAnimator = appSettings.GetAvatarAnimator();
@@ -43,64 +40,50 @@ public class SceneUI : MonoBehaviour
         recordButton.onClick.AddListener(() => { RecordMotion(); });
     }
 
-    private void Update()
-    {
+    private void Update() {
         ShowUI();
         ChangeRecordExportMode();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             RecordMotion();
         }
     }
 
-    public void ShowUI()
-    {
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
+    public void ShowUI() {
+        if (Input.GetKeyDown(KeyCode.Home)) {
             isUIActive = !isUIActive;
             UIComponents.SetActive(isUIActive);
         }
     }
 
-    public void ChangeRecordExportMode()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
+    public void ChangeRecordExportMode() {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             isBVHRecorder.isOn = !isBVHRecorder.isOn;
             Debug.Log(isBVHRecorder.isOn);
         }
     }
 
 
-    public void RecordMotion()
-    {
+    public void RecordMotion() {
         msg = "";
-        if (!isBVHRecorder.isOn)
-        {
-            if (!motionDataRecorder.isRecording)
-            {
+        if (!isBVHRecorder.isOn) {
+            if (!motionDataRecorder.isRecording) {
                 recordButtonAnimator.SetBool("isRecording", true);
                 motionDataRecorder.RecordStart();
             }
-            else
-            {
-                try
-                {
+            else {
+                try {
                     motionDataRecorder.RecordEnd();
                     recordButtonAnimator.SetBool("isRecording", false);
                     msg = "Record Anim Success!";
                 }
-                catch (System.Exception e)
-                {
+                catch (System.Exception e) {
                     msg = "Record Anim Fail！!";
                     Debug.LogError("Fail！" + e.Message + e.StackTrace);
                 }
             }
         }
-        else
-        {
-            if (!isRecording)
-            {
+        else {
+            if (!isRecording) {
                 recordButtonAnimator.SetBool("isRecording", true);
                 bvhRecorder = gameObject.AddComponent<BVHRecorder>();
                 isRecording = true;
@@ -117,10 +100,8 @@ public class SceneUI : MonoBehaviour
                 bvhRecorder.frameRate = 60f;
                 bvhRecorder.catchUp = true;
             }
-            else
-            {
-                try
-                {
+            else {
+                try {
                     isRecording = false;
                     recordButtonAnimator.SetBool("isRecording", false);
                     bvhRecorder.capturing = false;
@@ -138,8 +119,7 @@ public class SceneUI : MonoBehaviour
                     bvhRecorder = null;
                     msg = "Record BVH Success!";
                 }
-                catch (System.Exception e)
-                {
+                catch (System.Exception e) {
                     msg = "Record BVH Fail！!";
                     Debug.LogError("Fail！" + e.Message + e.StackTrace);
                 }
@@ -151,8 +131,7 @@ public class SceneUI : MonoBehaviour
         Invoke("MessageHide", 0.5f);
     }
 
-    public void MessageHide()
-    {
+    public void MessageHide() {
         message.gameObject.SetActive(false);
     }
 }

@@ -2,21 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class MapSelection : MonoBehaviour
-{
+public class MapSelection : MonoBehaviour {
     [SerializeField] private GameObject currentScene;
     [SerializeField] private GameObject currentMapLight;
     [SerializeField] private Transform lightPivot;
     [SerializeField] private Transform mapPivot;
-
     [SerializeField] private AvatarCameraController avatarCameraController;
     public VideoPlayer videoPlayer;
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private GameObject mapItem;
     [SerializeField] private MapUnit[] _mapUnits;
 
-    private void Start()
-    {
+    private void Start() {
         foreach (var mapUnit in _mapUnits)
         {
             MapItem map = GameObject.Instantiate(mapItem).GetComponent<MapItem>();
@@ -38,17 +35,14 @@ public class MapSelection : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         this.videoPlayer.Pause();
         _uiManager.screen.gameObject.SetActive(false);
     }
 
 
-    private void OnDisable()
-    {
-        if (!this.videoPlayer)
-        {
+    private void OnDisable() {
+        if (!this.videoPlayer) {
             return;
         }
 

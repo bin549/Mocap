@@ -3,8 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class VideoClipItem : MonoBehaviour
-{
+public class VideoClipItem : MonoBehaviour {
     public VideoPlayer videoPlayer;
     public string videoClipPath;
     private RenderTexture videoTexture;
@@ -12,25 +11,20 @@ public class VideoClipItem : MonoBehaviour
     private UnityAction<Texture2D> OnComplete;
     private int frameValue = 1;
 
-    private void Awake()
-    {
+    private void Awake() {
         videoPlayer = GetComponent<VideoPlayer>();
         textureImage = GetComponent<RawImage>();
     }
 
-    public void SetVideoClipSource(string clipPath)
-    {
+    public void SetVideoClipSource(string clipPath) {
         this.videoClipPath = clipPath;
-        this.GetOneFrameTexture((texture2D) =>
-        {
+        this.GetOneFrameTexture((texture2D) => {
             textureImage.texture = texture2D;
         });
     }
 
-    private void GetOneFrameTexture(UnityAction<Texture2D> onComplete)
-    {
-        if (!string.IsNullOrEmpty(this.videoClipPath))
-        {
+    private void GetOneFrameTexture(UnityAction<Texture2D> onComplete) {
+        if (!string.IsNullOrEmpty(this.videoClipPath)) {
             videoPlayer.url = this.videoClipPath;
         }
         OnComplete = onComplete;
@@ -40,12 +34,9 @@ public class VideoClipItem : MonoBehaviour
         videoPlayer.Play();
     }
 
-    private void frameReady(VideoPlayer source, long frameIdx)
-    {
+    private void frameReady(VideoPlayer source, long frameIdx) {
         frameValue++;
-    Debug.Log(frameValue);
-        if (frameValue >= 1)
-        {
+        if (frameValue >= 1) {
             OnComplete?.Invoke(TextureToTexture2D(source.texture));
             videoPlayer.frameReady -= frameReady;
             videoPlayer.sendFrameReadyEvents = false;
@@ -53,8 +44,7 @@ public class VideoClipItem : MonoBehaviour
         }
     }
 
-    private Texture2D TextureToTexture2D(Texture texture)
-    {
+    private Texture2D TextureToTexture2D(Texture texture) {
         Texture2D texture2D = new Texture2D(texture.width, texture.height, TextureFormat.RGBA32, false);
         RenderTexture renderTexture = RenderTexture.GetTemporary(texture.width, texture.height);
         Graphics.Blit(texture, renderTexture);
@@ -65,8 +55,7 @@ public class VideoClipItem : MonoBehaviour
         return texture2D;
     }
 
-    public void OnVideoPlayerSourceUpdate(VideoPlayer videoPlayer)
-    {
+    public void OnVideoPlayerSourceUpdate(VideoPlayer videoPlayer) {
         videoPlayer.url = videoClipPath;
     }
 }

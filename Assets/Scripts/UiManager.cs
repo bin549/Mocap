@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UiManager : MonoBehaviour
-{
+public class UiManager : MonoBehaviour {
     public GameObject[] uiPanels;
     public Button avatarSelectionButton;
     public AvatarSelection avatarSelectionPanel;
@@ -17,8 +16,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private AvatarCameraController _avatarCameraController;
     public RawImage screen;
 
-    private void Start()
-    {
+    private void Start() {
         avatarSelectionButton.onClick.AddListener((() =>
         {
             this.SetPanelActive(avatarSelectionPanel.gameObject);
@@ -32,16 +30,14 @@ public class UiManager : MonoBehaviour
         videoSourceSelection.videoPlayer.Pause();
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             QuitApp();
         }
     }
 
-    public void QuitApp()
-    {
+    public void QuitApp() {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -49,8 +45,7 @@ public class UiManager : MonoBehaviour
 #endif
     }
 
-    public void ToggleUI()
-    {
+    public void ToggleUI() {
         if (deviceSelection.defaultImageSource == ImageSourceType.WebCamera)
         {
             deviceSelection.gameObject.SetActive(!deviceSelection.gameObject.activeSelf);
@@ -69,8 +64,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    private void SetPanelActive(GameObject panel)
-    {
+    private void SetPanelActive(GameObject panel) {
         panel.SetActive(!panel.activeSelf);
         this._avatarCameraController.isInputDisable = panel.activeSelf;
     }
