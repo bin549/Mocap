@@ -17,12 +17,10 @@ public class UiManager : MonoBehaviour {
     public RawImage screen;
 
     private void Start() {
-        avatarSelectionButton.onClick.AddListener((() =>
-        {
+        avatarSelectionButton.onClick.AddListener((() => {
             this.SetPanelActive(avatarSelectionPanel.gameObject);
         }));
-        videoSourceSelectionButton.onClick.AddListener((() =>
-        {
+        videoSourceSelectionButton.onClick.AddListener((() => {
             this.SetPanelActive(videoSourceSelection.gameObject);
         }));
         mapSelectionButton.onClick.AddListener((() => { this.SetPanelActive(mapSelectionPanel); }));
@@ -31,8 +29,7 @@ public class UiManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             QuitApp();
         }
     }
@@ -46,20 +43,15 @@ public class UiManager : MonoBehaviour {
     }
 
     public void ToggleUI() {
-        if (deviceSelection.defaultImageSource == ImageSourceType.WebCamera)
-        {
+        if (deviceSelection.defaultImageSource == ImageSourceType.WebCamera) {
             deviceSelection.gameObject.SetActive(!deviceSelection.gameObject.activeSelf);
         }
-        foreach (var uiPanel in uiPanels)
-        {
+        foreach (var uiPanel in uiPanels) {
             uiPanel.SetActive(!deviceSelection.gameObject.activeSelf);
         }
-        if (deviceSelection.gameObject.activeSelf)
-        {
+        if (deviceSelection.gameObject.activeSelf) {
             videoSourceSelection.videoPlayer.Pause();
-        }
-        else
-        {
+        } else {
             videoSourceSelection.videoPlayer.Play();
         }
     }

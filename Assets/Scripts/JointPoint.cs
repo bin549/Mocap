@@ -2,8 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class JointPoint
-{
+public class JointPoint {
     public Vector2 pos2D = new Vector2();
     public float score2D;
 

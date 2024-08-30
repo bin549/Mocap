@@ -14,14 +14,12 @@ public class MapSelection : MonoBehaviour {
     [SerializeField] private MapUnit[] _mapUnits;
 
     private void Start() {
-        foreach (var mapUnit in _mapUnits)
-        {
+        foreach (var mapUnit in _mapUnits) {
             MapItem map = GameObject.Instantiate(mapItem).GetComponent<MapItem>();
             map.gameObject.transform.SetParent(transform);
             Button mapButton = map.gameObject.GetComponent<Button>();
             mapButton.image.sprite = mapUnit.sprite;
-            mapButton.onClick.AddListener(() =>
-            {
+            mapButton.onClick.AddListener(() => {
                 GameObject.Destroy(currentScene);
                 GameObject.Destroy(currentMapLight);
                 currentScene = GameObject.Instantiate(mapUnit.map);
@@ -40,12 +38,10 @@ public class MapSelection : MonoBehaviour {
         _uiManager.screen.gameObject.SetActive(false);
     }
 
-
     private void OnDisable() {
         if (!this.videoPlayer) {
             return;
         }
-
         this.videoPlayer.Play();
         _uiManager.screen.gameObject.SetActive(true);
     }

@@ -1,5 +1,4 @@
 using UnityEngine;
 
-public class AvatarItem : MonoBehaviour
-{
+public class AvatarItem : MonoBehaviour {
 }

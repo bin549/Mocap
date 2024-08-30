@@ -8,8 +8,7 @@ using UnityEditor;
 using System.IO;
 
 [Serializable]
-public class MotionDataSettings
-{
+public class MotionDataSettings {
     public enum Rootbonesystem
     {
         Hipbone,

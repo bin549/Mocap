@@ -34,11 +34,9 @@ public class DeviceSelection : MonoBehaviour {
         this.OnAppInit();
     }
     
-
     public void OnAppInit() {
         solution.gameObject.SetActive(true);
     }
-
 
     public void OnAppBoot() {
         selectedAvatar.SetActive(true);

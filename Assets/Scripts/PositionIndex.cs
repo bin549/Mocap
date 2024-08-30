@@ -1,5 +1,4 @@
-﻿public enum PositionIndex
-{
+﻿public enum PositionIndex {
     RightShoulderBend = 0,
     RightForearmBend,
     RightHand,
@@ -40,10 +39,8 @@
     None,
 }
 
-public static class PositionIndexExtension
-{
-    public static int Int(this PositionIndex i)
-    {
+public static class PositionIndexExtension {
+    public static int Int(this PositionIndex i) {
         return (int)i;
     }
 }

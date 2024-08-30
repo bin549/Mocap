@@ -38,11 +38,9 @@ public class FolderUtils : MonoBehaviour {
                 }
             }
         }
-
         foreach (FileInfo file in f2) {
             f3.Add(file.ToString());
         }
-
         return f3.ToArray();
     }
 
@@ -51,11 +49,9 @@ public class FolderUtils : MonoBehaviour {
         if (!directoryPath.EndsWith("\\")) {
             directoryPath += "\\";
         }
-
         if (Path.GetPathRoot(directoryPath) == directoryPath) {
             return directory;
         }
-
         return Path.GetDirectoryName(directoryPath) + Path.DirectorySeparatorChar;
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class AvatarCameraController : MonoBehaviour
-{
+public class AvatarCameraController : MonoBehaviour {
     public SkeletonAvatar avatar;
     public Transform avatarTransform;
     private Vector3 offsetPosition;
@@ -11,23 +10,19 @@ public class AvatarCameraController : MonoBehaviour
     public float rotateSpeed = 30;
     public bool isInputDisable = true;
 
-    public void StartControl()
-    {
+    public void StartControl() {
         this.avatarTransform = avatar.gameObject.transform;
         transform.LookAt(avatarTransform.position);
         this.offsetPosition = transform.position - avatarTransform.position;
         this.isInputDisable = false;
     }
 
-    public void SetAvatar(Transform avatar)
-    {
+    public void SetAvatar(Transform avatar) {
         this.avatarTransform = avatar;
     }
     
-    private void Update()
-    {
-        if ( this.isInputDisable)
-        {
+    private void Update() {
+        if ( this.isInputDisable) {
             return;
         }
         transform.position =  this.offsetPosition +  this.avatarTransform.position;
@@ -36,30 +31,25 @@ public class AvatarCameraController : MonoBehaviour
         this.ScrollViewArrow();
     }
 
-    private void ScrollViewArrow()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
+    private void ScrollViewArrow() {
+        if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.RotateAround( this.avatarTransform.transform.position, Vector3.up,  this.rotateSpeed * 5 * Time.deltaTime);
             this.offsetPosition =  transform.position -  this.avatarTransform.transform.position;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
+        if (Input.GetKey(KeyCode.RightArrow)) {
             transform.RotateAround( this.avatarTransform.transform.position, Vector3.up, -rotateSpeed * 5 * Time.deltaTime);
             this.offsetPosition = transform.position - avatarTransform.transform.position;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
+        if (Input.GetKey(KeyCode.UpArrow)) {
             distance = offsetPosition.magnitude;
             distance += (float)0.2 * -scrollSpeed;
             distance = Mathf.Clamp(distance, 1, 10);
             offsetPosition = offsetPosition.normalized * distance;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
+        if (Input.GetKey(KeyCode.DownArrow)) {
             distance = offsetPosition.magnitude;
             distance += (float)0.2 * scrollSpeed;
             distance = Mathf.Clamp(distance, 1, 10);
@@ -67,28 +57,21 @@ public class AvatarCameraController : MonoBehaviour
         }
     }
 
-    private void ScrollViewMouse()
-    {
+    private void ScrollViewMouse() {
         distance = offsetPosition.magnitude;
         distance += Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed;
         distance = Mathf.Clamp(distance, 5, 10);
         offsetPosition = offsetPosition.normalized * distance;
     }
 
-    private void RotateView()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
+    private void RotateView() {
+        if (Input.GetMouseButtonDown(1)) {
             isRotating = true;
         }
-
-        if (Input.GetMouseButtonUp(1))
-        {
+        if (Input.GetMouseButtonUp(1)) {
             isRotating = false;
         }
-
-        if (isRotating)
-        {
+        if (isRotating) {
             transform.RotateAround(avatarTransform.position, avatarTransform.up,
                 rotateSpeed * Input.GetAxis("Mouse X"));
             Vector3 originalPos = transform.position;
@@ -101,7 +84,6 @@ public class AvatarCameraController : MonoBehaviour
                 transform.rotation = originalRotation;
             }
         }
-
         offsetPosition = transform.position - avatarTransform.position;
     }
 }

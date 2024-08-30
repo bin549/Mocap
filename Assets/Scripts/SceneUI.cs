@@ -106,26 +106,22 @@ public class SceneUI : MonoBehaviour {
                     recordButtonAnimator.SetBool("isRecording", false);
                     bvhRecorder.capturing = false;
                     var path = appSettings.GetSavedFolderPath();
-                    if (path.Length != 0)
-                    {
+                    if (path.Length != 0) {
                         FileInfo fi = new FileInfo(path);
                         bvhRecorder.directory = fi.DirectoryName;
                         bvhRecorder.filename = string.Format("RecordMotion_{0}{1:yyyy_MM_dd_HH_mm_ss}.bvh", "motion",
                             DateTime.Now);
                         bvhRecorder.saveBVH();
                     }
-
                     bvhRecorder.clearCapture();
                     bvhRecorder = null;
                     msg = "Record BVH Success!";
-                }
-                catch (System.Exception e) {
+                } catch (System.Exception e) {
                     msg = "Record BVH Fail！!";
                     Debug.LogError("Fail！" + e.Message + e.StackTrace);
                 }
             }
         }
-
         message.gameObject.SetActive(true);
         message.text = msg;
         Invoke("MessageHide", 0.5f);

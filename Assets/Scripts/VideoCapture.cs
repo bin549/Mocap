@@ -34,8 +34,7 @@ public class VideoCapture : MonoBehaviour {
             rawImages[rawImagesIndex].gameObject.SetActive(false);
             rawImagesIndex++;
 
-            if (rawImagesIndex == rawImages.Length)
-            {
+            if (rawImagesIndex == rawImages.Length) {
                 rawImagesIndex = 0;
             }
 
@@ -43,12 +42,9 @@ public class VideoCapture : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.X)) {
-            if (!isScale)
-            {
+            if (!isScale) {
                 videoPlayer.aspectRatio = VideoAspectRatio.FitHorizontally;
-            }
-            else
-            {
+            } else {
                 videoPlayer.aspectRatio = VideoAspectRatio.NoScaling;
             }
 
@@ -62,8 +58,7 @@ public class VideoCapture : MonoBehaviour {
 
         if (useWebCam) {
             PlayWebCamera();
-        }
-        else {
+        } else {
             PlayVideo();
         }
     }
@@ -73,9 +68,7 @@ public class VideoCapture : MonoBehaviour {
         if (devices.Length <= webCamIndex) {
             webCamIndex = 0;
         }
-
         webCamTexture = new WebCamTexture(devices[webCamIndex].name);
-
         foreach (RawImage rawImage in rawImages) {
             RectTransform rectTransform = rawImage.GetComponent<RectTransform>();
             rawImage.texture = webCamTexture;
@@ -94,19 +87,14 @@ public class VideoCapture : MonoBehaviour {
     private void PlayVideo() {
         VideoClip vclip = (VideoClip)Resources.Load(videoPlayer.url);
         if (vclip != null) {
-            if ((int)vclip.width == 0 || (int)vclip.height == 0)
-            {
+            if ((int)vclip.width == 0 || (int)vclip.height == 0) {
                 videoTexture = new RenderTexture(1920, 1080, 24);
-            }
-            else
-            {
+            } else {
                 videoTexture = new RenderTexture((int)vclip.width, (int)vclip.height, 24);
             }
-        }
-        else {
+        } else {
             videoTexture = new RenderTexture(1920, 1080, 24);
         }
-
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = videoTexture;
 
@@ -118,12 +106,9 @@ public class VideoCapture : MonoBehaviour {
         //        rectTransform.sizeDelta = new Vector2(rawImageWidth, (int)(rawImageWidth * videoPlayer.clip.height / videoPlayer.clip.width));
 
         videoPlayer.Play();
-
         float aspect = (float)videoTexture.width / videoTexture.height;
-
         this.transform.localScale = new Vector3(aspect, 1, 1) * scale;
         this.GetComponent<Renderer>().material.mainTexture = videoTexture;
-
         InitializeTexture();
     }
 
@@ -146,14 +131,12 @@ public class VideoCapture : MonoBehaviour {
         camera.farClipPlane = 5.0f;
         camera.allowMSAA = false;
         camera.allowHDR = false;
-
         renderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.RGB565, RenderTextureReadWrite.sRGB) {
             useMipMap = false,
             autoGenerateMips = false,
             wrapMode = TextureWrapMode.Clamp,
             filterMode = FilterMode.Point,
         };
-
         camera.targetTexture = renderTexture;
     }
 }

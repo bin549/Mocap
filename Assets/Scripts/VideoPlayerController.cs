@@ -35,8 +35,7 @@ public class VideoPlayerController : MonoBehaviour {
         if (status == Status.VideoPlay) {
             videoPlayer.Pause();
             status = Status.VideoPause;
-        }
-        else if (status == Status.VideoPause) {
+        } else if (status == Status.VideoPause) {
             videoPlayer.Play();
             status = Status.VideoPlay;
         }
