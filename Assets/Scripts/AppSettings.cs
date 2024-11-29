@@ -18,13 +18,12 @@ public class AppSettings : MonoBehaviour {
     [SerializeField] private Camera viewCamera;
     public bool isAppBoot = false;
     public MotionDataRecorder motionDataRecorder;
-    
+
     private void Awake() {
         if (_Instance != null) {
             Destroy(gameObject);
             return;
         }
-    
         _Instance = this;
         DontDestroyOnLoad(this);
     }
@@ -47,65 +46,65 @@ public class AppSettings : MonoBehaviour {
             savedFolderPath = FolderUtils.CheckDirectory(Application.dataPath + @"/Resources");
         }
     }
-    
+
     public void SetAvatar(Avatar avatar) {
         this.avatar = avatar;
     }
-    
+
     public Avatar GetAvatar() {
         if (avatar != null) {
             return avatar;
         }
-    
+
         return null;
     }
-    
+
     public Animator GetAvatarAnimator() {
         if (avatarAnimator != null) {
             return avatarAnimator;
         }
-    
+
         return null;
     }
-    
+
     public void SetAvatarAnimator(Animator avatarAnimator) {
         this.avatarAnimator = avatarAnimator;
     }
-    
+
     public string GetVideosFolderPath() {
         return videosFolderPath;
     }
-    
+
     public string[] GetModels() {
         string[] extensions = new string[] {
             ".fbx", ".obj"
         };
         return FolderUtils.GetFilterdFiles(modelsFolderPath, extensions);
     }
-    
-    
+
+
     public string GetModelsFolderPath() {
         return modelsFolderPath;
     }
-    
+
     public string GetSavedFolderPath() {
         return savedFolderPath;
     }
-    
+
     public void SetVideosFolderPath() {
         var path = FolderUtils.SelectFolder();
         if (!string.IsNullOrEmpty(path)) {
             videosFolderPath = path;
         }
     }
-    
+
     public void SetModelsFolderPath() {
         var path = FolderUtils.SelectFolder();
         if (!string.IsNullOrEmpty(path)) {
             modelsFolderPath = path;
         }
     }
-    
+
     public void SetSavedFolderPath() {
         var path = FolderUtils.SelectFolder();
         if (!string.IsNullOrEmpty(path)) {

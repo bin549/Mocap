@@ -20,7 +20,6 @@ public class Avatar : MonoBehaviour {
     private float prevTall = 224 * 0.75f;
     private float zScale = 1;
 
-
     private void Awake() {
         skeleton = new GameObject("Skeleton");
         animator = this.GetComponent<Animator>();
@@ -36,7 +35,6 @@ public class Avatar : MonoBehaviour {
         if (animator != null) {
             return animator;
         }
-
         return null;
     }
 
@@ -271,14 +269,11 @@ public class Avatar : MonoBehaviour {
 
         // Rotate each of the bones.
         foreach (JointPoint jointPoint in jointPoints) {
-            if (jointPoint.parent != null)
-            {
+            if (jointPoint.parent != null) {
                 Vector3 fv = jointPoint.parent.pos3D - jointPoint.pos3D;
                 jointPoint.transform.rotation = Quaternion.LookRotation(jointPoint.pos3D - jointPoint.child.pos3D, fv) *
                                                 jointPoint.inverseRotation;
-            }
-            else if (jointPoint.child != null)
-            {
+            } else if (jointPoint.child != null) {
                 jointPoint.transform.rotation =
                     Quaternion.LookRotation(jointPoint.pos3D - jointPoint.child.pos3D, forward) *
                     jointPoint.inverseRotation;

@@ -39,12 +39,10 @@ public class AvatarSelection : MonoBehaviour {
         _uiManager.screen.gameObject.SetActive(false);
     }
 
-
     private void OnDisable() {
         if (!this.videoPlayer) {
             return;
         }
-
         this.videoPlayer.Play();
         _uiManager.screen.gameObject.SetActive(true);
     }

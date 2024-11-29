@@ -18,9 +18,7 @@ public class VideoClipItem : MonoBehaviour {
 
     public void SetVideoClipSource(string clipPath) {
         this.videoClipPath = clipPath;
-        this.GetOneFrameTexture((texture2D) => {
-            textureImage.texture = texture2D;
-        });
+        this.GetOneFrameTexture((texture2D) => { textureImage.texture = texture2D; });
     }
 
     private void GetOneFrameTexture(UnityAction<Texture2D> onComplete) {

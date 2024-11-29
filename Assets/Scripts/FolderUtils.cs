@@ -19,7 +19,6 @@ public class FolderUtils : MonoBehaviour {
         foreach (var p in paths) {
             path += p;
         }
-
         return path;
     }
 

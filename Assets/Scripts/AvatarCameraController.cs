@@ -20,12 +20,12 @@ public class AvatarCameraController : MonoBehaviour {
     public void SetAvatar(Transform avatar) {
         this.avatarTransform = avatar;
     }
-    
+
     private void Update() {
-        if ( this.isInputDisable) {
+        if (this.isInputDisable) {
             return;
         }
-        transform.position =  this.offsetPosition +  this.avatarTransform.position;
+        transform.position = this.offsetPosition + this.avatarTransform.position;
         this.RotateView();
         this.ScrollViewMouse();
         this.ScrollViewArrow();
@@ -33,12 +33,14 @@ public class AvatarCameraController : MonoBehaviour {
 
     private void ScrollViewArrow() {
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.RotateAround( this.avatarTransform.transform.position, Vector3.up,  this.rotateSpeed * 5 * Time.deltaTime);
-            this.offsetPosition =  transform.position -  this.avatarTransform.transform.position;
+            transform.RotateAround(this.avatarTransform.transform.position, Vector3.up,
+                this.rotateSpeed * 5 * Time.deltaTime);
+            this.offsetPosition = transform.position - this.avatarTransform.transform.position;
         }
 
         if (Input.GetKey(KeyCode.RightArrow)) {
-            transform.RotateAround( this.avatarTransform.transform.position, Vector3.up, -rotateSpeed * 5 * Time.deltaTime);
+            transform.RotateAround(this.avatarTransform.transform.position, Vector3.up,
+                -rotateSpeed * 5 * Time.deltaTime);
             this.offsetPosition = transform.position - avatarTransform.transform.position;
         }
 
@@ -78,8 +80,7 @@ public class AvatarCameraController : MonoBehaviour {
             Quaternion originalRotation = transform.rotation;
             //transform.RotateAround(avatarTransform.position, avatarTransform.right, -rotateSpeed * Input.GetAxis("Mouse Y"));
             float x = transform.eulerAngles.x;
-            if (x < 10 || x > 80)
-            {
+            if (x < 10 || x > 80) {
                 transform.position = originalPos;
                 transform.rotation = originalRotation;
             }

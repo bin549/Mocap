@@ -69,20 +69,17 @@ public class SceneUI : MonoBehaviour {
             if (!motionDataRecorder.isRecording) {
                 recordButtonAnimator.SetBool("isRecording", true);
                 motionDataRecorder.RecordStart();
-            }
-            else {
+            } else {
                 try {
                     motionDataRecorder.RecordEnd();
                     recordButtonAnimator.SetBool("isRecording", false);
                     msg = "Record Anim Success!";
-                }
-                catch (System.Exception e) {
+                } catch (System.Exception e) {
                     msg = "Record Anim Fail！!";
                     Debug.LogError("Fail！" + e.Message + e.StackTrace);
                 }
             }
-        }
-        else {
+        } else {
             if (!isRecording) {
                 recordButtonAnimator.SetBool("isRecording", true);
                 bvhRecorder = gameObject.AddComponent<BVHRecorder>();
@@ -99,8 +96,7 @@ public class SceneUI : MonoBehaviour {
                 bvhRecorder.capturing = true;
                 bvhRecorder.frameRate = 60f;
                 bvhRecorder.catchUp = true;
-            }
-            else {
+            } else {
                 try {
                     isRecording = false;
                     recordButtonAnimator.SetBool("isRecording", false);

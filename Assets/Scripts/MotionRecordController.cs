@@ -25,8 +25,7 @@ public class RecordController : MonoBehaviour {
         if (!appSettings.motionDataRecorder.isRecording) {
             _animator.SetBool("isRecording", true);
             appSettings.motionDataRecorder.RecordStart();
-        }
-        else {
+        } else {
             try {
                 appSettings.motionDataRecorder.RecordEnd();
                 _animator.SetBool("isRecording", false);

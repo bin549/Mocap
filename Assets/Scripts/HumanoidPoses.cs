@@ -9,14 +9,12 @@ using System.IO;
 
 [Serializable]
 public class MotionDataSettings {
-    public enum Rootbonesystem
-    {
+    public enum Rootbonesystem {
         Hipbone,
         Objectroot
     }
 
-    public static Dictionary<string, string> TraitPropMap = new Dictionary<string, string>
-    {
+    public static Dictionary<string, string> TraitPropMap = new Dictionary<string, string> {
         { "Left Thumb 1 Stretched", "LeftHand.Thumb.1 Stretched" },
         { "Left Thumb Spread", "LeftHand.Thumb.Spread" },
         { "Left Thumb 2 Stretched", "LeftHand.Thumb.2 Stretched" },
@@ -60,18 +58,15 @@ public class MotionDataSettings {
     };
 }
 
-public class HumanoidPoses : ScriptableObject
-{
+public class HumanoidPoses : ScriptableObject {
 #if UNITY_EDITOR
     [ContextMenu("Export as Generic animation clips")]
-    public void ExportGenericAnim()
-    {
+    public void ExportGenericAnim() {
         var clip = new AnimationClip { frameRate = 30 };
         AnimationUtility.SetAnimationClipSettings(clip, new AnimationClipSettings { loopTime = false });
 
         var bones = Poses[0].HumanoidBones;
-        for (int i = 0; i < bones.Count; i++)
-        {
+        for (int i = 0; i < bones.Count; i++) {
             var positionCurveX = new AnimationCurve();
             var positionCurveY = new AnimationCurve();
             var positionCurveZ = new AnimationCurve();
@@ -80,8 +75,7 @@ public class HumanoidPoses : ScriptableObject
             var rotationCurveZ = new AnimationCurve();
             var rotationCurveW = new AnimationCurve();
 
-            foreach (var p in Poses)
-            {
+            foreach (var p in Poses) {
                 positionCurveX.AddKey(p.Time, p.HumanoidBones[i].LocalPosition.x);
                 positionCurveY.AddKey(p.Time, p.HumanoidBones[i].LocalPosition.y);
                 positionCurveZ.AddKey(p.Time, p.HumanoidBones[i].LocalPosition.z);
@@ -92,51 +86,44 @@ public class HumanoidPoses : ScriptableObject
             }
 
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalPosition.x"
                 }, positionCurveX);
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalPosition.y"
                 }, positionCurveY);
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalPosition.z"
                 }, positionCurveZ);
 
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalRotation.x"
                 }, rotationCurveX);
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalRotation.y"
                 }, rotationCurveY);
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalRotation.z"
                 }, rotationCurveZ);
             AnimationUtility.SetEditorCurve(clip,
-                new EditorCurveBinding
-                {
+                new EditorCurveBinding {
                     path = Poses[0].HumanoidBones[i].Name,
                     type = typeof(Transform),
                     propertyName = "m_LocalRotation.w"
@@ -152,8 +139,7 @@ public class HumanoidPoses : ScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    public void SaveAnim()
-    {
+    public void SaveAnim() {
         var clip = new AnimationClip { frameRate = 30 };
         AnimationUtility.SetAnimationClipSettings(clip, new AnimationClipSettings { loopTime = false });
 
@@ -162,8 +148,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.BodyPosition.x);
                 curveY.AddKey(item.Time, item.BodyPosition.y);
                 curveZ.AddKey(item.Time, item.BodyPosition.z);
@@ -181,8 +166,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.LeftfootIK_Pos.x);
                 curveY.AddKey(item.Time, item.LeftfootIK_Pos.y);
                 curveZ.AddKey(item.Time, item.LeftfootIK_Pos.z);
@@ -200,8 +184,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.RightfootIK_Pos.x);
                 curveY.AddKey(item.Time, item.RightfootIK_Pos.y);
                 curveZ.AddKey(item.Time, item.RightfootIK_Pos.z);
@@ -220,8 +203,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.BodyRotation.x);
                 curveY.AddKey(item.Time, item.BodyRotation.y);
                 curveZ.AddKey(item.Time, item.BodyRotation.z);
@@ -243,8 +225,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.LeftfootIK_Rot.x);
                 curveY.AddKey(item.Time, item.LeftfootIK_Rot.y);
                 curveZ.AddKey(item.Time, item.LeftfootIK_Rot.z);
@@ -266,8 +247,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.RightfootIK_Rot.x);
                 curveY.AddKey(item.Time, item.RightfootIK_Rot.y);
                 curveZ.AddKey(item.Time, item.RightfootIK_Rot.z);
@@ -285,17 +265,14 @@ public class HumanoidPoses : ScriptableObject
         }
 
         // muscles
-        for (int i = 0; i < HumanTrait.MuscleCount; i++)
-        {
+        for (int i = 0; i < HumanTrait.MuscleCount; i++) {
             var curve = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curve.AddKey(item.Time, item.Muscles[i]);
             }
 
             var muscle = HumanTrait.MuscleName[i];
-            if (MotionDataSettings.TraitPropMap.ContainsKey(muscle))
-            {
+            if (MotionDataSettings.TraitPropMap.ContainsKey(muscle)) {
                 muscle = MotionDataSettings.TraitPropMap[muscle];
             }
 
@@ -311,8 +288,7 @@ public class HumanoidPoses : ScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    public void ExportHumanoidAnim()
-    {
+    public void ExportHumanoidAnim() {
         var clip = new AnimationClip { frameRate = 30 };
         AnimationUtility.SetAnimationClipSettings(clip, new AnimationClipSettings { loopTime = false });
 
@@ -321,8 +297,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.BodyPosition.x);
                 curveY.AddKey(item.Time, item.BodyPosition.y);
                 curveZ.AddKey(item.Time, item.BodyPosition.z);
@@ -340,8 +315,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.LeftfootIK_Pos.x);
                 curveY.AddKey(item.Time, item.LeftfootIK_Pos.y);
                 curveZ.AddKey(item.Time, item.LeftfootIK_Pos.z);
@@ -359,8 +333,7 @@ public class HumanoidPoses : ScriptableObject
             var curveX = new AnimationCurve();
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.RightfootIK_Pos.x);
                 curveY.AddKey(item.Time, item.RightfootIK_Pos.y);
                 curveZ.AddKey(item.Time, item.RightfootIK_Pos.z);
@@ -379,8 +352,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.BodyRotation.x);
                 curveY.AddKey(item.Time, item.BodyRotation.y);
                 curveZ.AddKey(item.Time, item.BodyRotation.z);
@@ -402,8 +374,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.LeftfootIK_Rot.x);
                 curveY.AddKey(item.Time, item.LeftfootIK_Rot.y);
                 curveZ.AddKey(item.Time, item.LeftfootIK_Rot.z);
@@ -425,8 +396,7 @@ public class HumanoidPoses : ScriptableObject
             var curveY = new AnimationCurve();
             var curveZ = new AnimationCurve();
             var curveW = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curveX.AddKey(item.Time, item.RightfootIK_Rot.x);
                 curveY.AddKey(item.Time, item.RightfootIK_Rot.y);
                 curveZ.AddKey(item.Time, item.RightfootIK_Rot.z);
@@ -444,17 +414,14 @@ public class HumanoidPoses : ScriptableObject
         }
 
         // muscles
-        for (int i = 0; i < HumanTrait.MuscleCount; i++)
-        {
+        for (int i = 0; i < HumanTrait.MuscleCount; i++) {
             var curve = new AnimationCurve();
-            foreach (var item in Poses)
-            {
+            foreach (var item in Poses) {
                 curve.AddKey(item.Time, item.Muscles[i]);
             }
 
             var muscle = HumanTrait.MuscleName[i];
-            if (MotionDataSettings.TraitPropMap.ContainsKey(muscle))
-            {
+            if (MotionDataSettings.TraitPropMap.ContainsKey(muscle)) {
                 muscle = MotionDataSettings.TraitPropMap[muscle];
             }
 
@@ -472,8 +439,7 @@ public class HumanoidPoses : ScriptableObject
 #endif
 
     [Serializable]
-    public class SerializeHumanoidPose
-    {
+    public class SerializeHumanoidPose {
         public Vector3 BodyRootPosition;
         public Quaternion BodyRootRotation;
 
@@ -491,23 +457,20 @@ public class HumanoidPoses : ScriptableObject
         public float Time;
 
         [Serializable]
-        public class HumanoidBone
-        {
+        public class HumanoidBone {
             public string Name;
             public Vector3 LocalPosition;
             public Quaternion LocalRotation;
 
             private static Dictionary<Transform, string> _pathCache = new Dictionary<Transform, string>();
 
-            private static string BuildRelativePath(Transform root, Transform target)
-            {
+            private static string BuildRelativePath(Transform root, Transform target) {
                 var path = "";
                 _pathCache.TryGetValue(target, out path);
                 if (path != null) return path;
 
                 var current = target;
-                while (true)
-                {
+                while (true) {
                     if (current == null) throw new Exception(target.name + "は" + root.name + "の子ではありません");
                     if (current == root) break;
 
@@ -521,8 +484,7 @@ public class HumanoidPoses : ScriptableObject
                 return path;
             }
 
-            public void Set(Transform root, Transform t)
-            {
+            public void Set(Transform root, Transform t) {
                 Name = BuildRelativePath(root, t);
 
                 LocalPosition = t.localPosition;
@@ -532,15 +494,13 @@ public class HumanoidPoses : ScriptableObject
 
         public List<HumanoidBone> HumanoidBones = new List<HumanoidBone>();
 
-        public string SerializeCSV()
-        {
+        public string SerializeCSV() {
             StringBuilder sb = new StringBuilder();
             SerializeVector3(sb, BodyRootPosition);
             SerializeQuaternion(sb, BodyRootRotation);
             SerializeVector3(sb, BodyPosition);
             SerializeQuaternion(sb, BodyRotation);
-            foreach (var muscle in Muscles)
-            {
+            foreach (var muscle in Muscles) {
                 sb.Append(muscle);
                 sb.Append(",");
             }
@@ -549,8 +509,7 @@ public class HumanoidPoses : ScriptableObject
             sb.Append(",");
             sb.Append(Time);
             sb.Append(",");
-            foreach (var humanoidBone in HumanoidBones)
-            {
+            foreach (var humanoidBone in HumanoidBones) {
                 sb.Append(humanoidBone.Name);
                 sb.Append(",");
                 SerializeVector3(sb, humanoidBone.LocalPosition);
@@ -561,8 +520,7 @@ public class HumanoidPoses : ScriptableObject
             return sb.ToString();
         }
 
-        private static void SerializeVector3(StringBuilder sb, Vector3 vec)
-        {
+        private static void SerializeVector3(StringBuilder sb, Vector3 vec) {
             sb.Append(vec.x);
             sb.Append(",");
             sb.Append(vec.y);
@@ -571,8 +529,7 @@ public class HumanoidPoses : ScriptableObject
             sb.Append(",");
         }
 
-        private static void SerializeQuaternion(StringBuilder sb, Quaternion q)
-        {
+        private static void SerializeQuaternion(StringBuilder sb, Quaternion q) {
             sb.Append(q.x);
             sb.Append(",");
             sb.Append(q.y);
@@ -583,30 +540,24 @@ public class HumanoidPoses : ScriptableObject
             sb.Append(",");
         }
 
-        public void DeserializeCSV(string str)
-        {
+        public void DeserializeCSV(string str) {
             string[] dataString = str.Split(',');
             BodyRootPosition = DeserializeVector3(dataString, 0);
             BodyRootRotation = DeserializeQuaternion(dataString, 3);
             BodyPosition = DeserializeVector3(dataString, 7);
             BodyRotation = DeserializeQuaternion(dataString, 10);
             Muscles = new float[HumanTrait.MuscleCount];
-            for (int i = 0; i < HumanTrait.MuscleCount; i++)
-            {
+            for (int i = 0; i < HumanTrait.MuscleCount; i++) {
                 Muscles[i] = float.Parse(dataString[i + 14]);
             }
-
             FrameCount = int.Parse(dataString[14 + HumanTrait.MuscleCount]);
             Time = float.Parse(dataString[15 + HumanTrait.MuscleCount]);
             var boneValues = Enum.GetValues(typeof(HumanBodyBones)) as HumanBodyBones[];
-            for (int i = 0; i < boneValues.Length; i++)
-            {
+            for (int i = 0; i < boneValues.Length; i++) {
                 int startIndex = 16 + HumanTrait.MuscleCount + (i * 8);
-                if (dataString.Length <= startIndex)
-                {
+                if (dataString.Length <= startIndex) {
                     break;
                 }
-
                 HumanoidBone bone = new HumanoidBone();
                 bone.Name = dataString[startIndex];
                 bone.LocalPosition = DeserializeVector3(dataString, startIndex + 1);
@@ -614,14 +565,12 @@ public class HumanoidPoses : ScriptableObject
             }
         }
 
-        private static Vector3 DeserializeVector3(IList<string> str, int startIndex)
-        {
+        private static Vector3 DeserializeVector3(IList<string> str, int startIndex) {
             return new Vector3(float.Parse(str[startIndex]), float.Parse(str[startIndex + 1]),
                 float.Parse(str[startIndex + 2]));
         }
 
-        private static Quaternion DeserializeQuaternion(IList<string> str, int startIndex)
-        {
+        private static Quaternion DeserializeQuaternion(IList<string> str, int startIndex) {
             return new Quaternion(float.Parse(str[startIndex]), float.Parse(str[startIndex + 1]),
                 float.Parse(str[startIndex + 2]), float.Parse(str[startIndex + 3]));
         }

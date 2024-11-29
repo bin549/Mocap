@@ -8,7 +8,7 @@ public class VideoSourceSelection : MonoBehaviour {
     [SerializeField] private AvatarCameraController avatarCameraController;
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private AppSettings _appSettings;
-    
+
     private void OnEnable() {
         this.videoPlayer.Pause();
         _uiManager.screen.gameObject.SetActive(false);
@@ -32,14 +32,14 @@ public class VideoSourceSelection : MonoBehaviour {
                     _appSettings.isAppBoot = true;
                     _uiManager.ToggleUI();
                     _uiManager.deviceSelection.OnAppBoot();
-                } 
+                }
                 videoClip.OnVideoPlayerSourceUpdate(this.videoPlayer);
                 this.gameObject.SetActive(false);
                 this.avatarCameraController.isInputDisable = false;
             });
         }
     }
-    
+
     public string[] GetVideos() {
         string[] extensions = new string[] {
             ".mp4", ".mov"

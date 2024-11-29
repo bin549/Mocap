@@ -43,24 +43,20 @@ public class MotionDataRecorder : MonoBehaviour {
         if (!isRecording) {
             return;
         }
-
         RecordedTime = Time.time - StartTime;
         if (TargetFPS != 0.0f) {
             var nextTime = (1.0f * (FrameIndex + 1)) / TargetFPS;
             if (nextTime > RecordedTime) {
                 return;
             }
-
             if (FrameIndex % TargetFPS == 0) {
                 print("Motion_FPS=" + 1 / (RecordedTime / FrameIndex));
             }
-        }
-        else {
+        } else {
             if (Time.frameCount % Application.targetFrameRate == 0) {
                 print("Motion_FPS=" + 1 / Time.deltaTime);
             }
         }
-
         _poseHandler.GetHumanPose(ref _currentPose);
         var serializedPose = new HumanoidPoses.SerializeHumanoidPose();
         switch (_rootBoneSystem) {
@@ -246,6 +242,5 @@ string path = Application.dataPath + @"/Resources";
     public void SetAnimator(Animator animator) {
         this._animator = animator;
         this._poseHandler = new HumanPoseHandler(_animator.avatar, _animator.transform);
-        
     }
 }

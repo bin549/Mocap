@@ -17,9 +17,7 @@ public class UiManager : MonoBehaviour {
     public RawImage screen;
 
     private void Start() {
-        avatarSelectionButton.onClick.AddListener((() => {
-            this.SetPanelActive(avatarSelectionPanel.gameObject);
-        }));
+        avatarSelectionButton.onClick.AddListener((() => { this.SetPanelActive(avatarSelectionPanel.gameObject); }));
         videoSourceSelectionButton.onClick.AddListener((() => {
             this.SetPanelActive(videoSourceSelection.gameObject);
         }));
