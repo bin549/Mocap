@@ -55,7 +55,6 @@ public class AppSettings : MonoBehaviour {
         if (avatar != null) {
             return avatar;
         }
-
         return null;
     }
 
@@ -63,7 +62,6 @@ public class AppSettings : MonoBehaviour {
         if (avatarAnimator != null) {
             return avatarAnimator;
         }
-
         return null;
     }
 

@@ -19,19 +19,15 @@ namespace Mediapipe.Unity {
             }
             var parentRect = gameObject.transform.parent.gameObject.GetComponent<RectTransform>().rect;
             var (width, height) = GetBoundingBoxSize(rectTransform);
-
             var ratio = parentRect.width / width;
             var h = height * ratio;
-
             if (_fitMode == FitMode.FitWidth || (_fitMode == FitMode.Expand && h >= parentRect.height) ||
                 (_fitMode == FitMode.Shrink && h <= parentRect.height)) {
                 rectTransform.offsetMin *= ratio;
                 rectTransform.offsetMax *= ratio;
                 return;
             }
-
             ratio = parentRect.height / height;
-
             rectTransform.offsetMin *= ratio;
             rectTransform.offsetMax *= ratio;
         }

@@ -37,20 +37,17 @@ public class AvatarCameraController : MonoBehaviour {
                 this.rotateSpeed * 5 * Time.deltaTime);
             this.offsetPosition = transform.position - this.avatarTransform.transform.position;
         }
-
         if (Input.GetKey(KeyCode.RightArrow)) {
             transform.RotateAround(this.avatarTransform.transform.position, Vector3.up,
                 -rotateSpeed * 5 * Time.deltaTime);
             this.offsetPosition = transform.position - avatarTransform.transform.position;
         }
-
         if (Input.GetKey(KeyCode.UpArrow)) {
             distance = offsetPosition.magnitude;
             distance += (float)0.2 * -scrollSpeed;
             distance = Mathf.Clamp(distance, 1, 10);
             offsetPosition = offsetPosition.normalized * distance;
         }
-
         if (Input.GetKey(KeyCode.DownArrow)) {
             distance = offsetPosition.magnitude;
             distance += (float)0.2 * scrollSpeed;
