@@ -4,7 +4,6 @@ using UnityEngine.UI;
 namespace Mediapipe.Unity {
     public class Screen : MonoBehaviour {
         [SerializeField] private RawImage _screen;
-
         private ImageSource _imageSource;
 
         public Texture texture {

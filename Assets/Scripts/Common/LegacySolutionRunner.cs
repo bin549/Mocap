@@ -5,9 +5,7 @@ namespace Mediapipe.Unity.Sample {
     public abstract class LegacySolutionRunner<TGraphRunner> : BaseRunner where TGraphRunner : GraphRunner {
         [SerializeField] protected Screen screen;
         [SerializeField] protected TGraphRunner graphRunner;
-
         private Coroutine _coroutine;
-
         public RunningMode runningMode;
 
         public long timeoutMillisec {

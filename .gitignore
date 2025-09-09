@@ -79,3 +79,4 @@ crashlytics-build.properties
 packages/*
 Assets/Videos/*
 Assets/MediaPipeUnity/*
+Assets/TextMesh Pro/*

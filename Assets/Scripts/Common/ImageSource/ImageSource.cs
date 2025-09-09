@@ -44,7 +44,7 @@ namespace Mediapipe.Unity {
         public virtual int textureHeight => resolution.height;
         public virtual double frameRate => resolution.frameRate;
 
-        public float focalLengthPx { get; } = 2.0f; // TODO: calculate at runtime
+        public float focalLengthPx { get; } = 2.0f;
         public virtual bool isHorizontallyFlipped { get; set; } = false;
         public virtual bool isVerticallyFlipped { get; } = false;
         public virtual bool isFrontFacing { get; } = false;

@@ -46,7 +46,6 @@ namespace Mediapipe.Unity {
             if (sourceId < 0 || sourceId >= _availableSources.Length) {
                 throw new ArgumentException($"Invalid source ID: {sourceId}");
             }
-
             video = _availableSources[sourceId];
             if (_videoPlayer != null) {
                 _videoPlayer.clip = video;
@@ -62,7 +61,6 @@ namespace Mediapipe.Unity {
             _videoPlayer.isLooping = true;
             _videoPlayer.clip = video;
             _videoPlayer.Prepare();
-
             yield return new WaitUntil(() => _videoPlayer.isPrepared);
             _videoPlayer.Play();
         }

@@ -134,20 +134,17 @@ namespace Mediapipe.Unity.Sample {
                     } catch (BadStatusException exception) {
                         Debug.LogError(exception);
                     }
-
                     try {
                         calculatorGraph.WaitUntilDone();
                     } catch (BadStatusException exception) {
                         Debug.LogError(exception);
                     }
                 }
-
                 _isRunning = false;
                 var _ = _NameTable.Remove(calculatorGraph.mpPtr);
                 calculatorGraph.Dispose();
                 calculatorGraph = null;
             }
-
             if (_stopwatch != null && _stopwatch.IsRunning) {
                 _stopwatch.Stop();
             }
@@ -160,16 +157,13 @@ namespace Mediapipe.Unity.Sample {
         protected void AddTextureFrameToInputStream(string streamName, Experimental.TextureFrame textureFrame,
             GlContext glContext = null) {
             latestTimestamp = GetCurrentTimestampMicrosec();
-
             if (glContext != null) {
                 var gpuBuffer = textureFrame.BuildGpuBuffer(glContext);
                 AddPacketToInputStream(streamName, Packet.CreateGpuBufferAt(gpuBuffer, latestTimestamp));
                 return;
             }
-
             var imageFrame = textureFrame.BuildImageFrame();
             textureFrame.Release();
-
             AddPacketToInputStream(streamName, Packet.CreateImageFrameAt(imageFrame, latestTimestamp));
         }
 

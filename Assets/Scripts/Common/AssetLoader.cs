@@ -3,7 +3,6 @@ using System.Collections;
 namespace Mediapipe.Unity.Sample {
     public static class AssetLoader {
         private static IResourceManager _ResourceManager;
-
         public static void Provide(IResourceManager manager) => _ResourceManager = manager;
 
         public static IEnumerator PrepareAssetAsync(string name, string uniqueKey, bool overwrite = false) {

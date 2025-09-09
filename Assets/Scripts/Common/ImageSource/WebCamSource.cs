@@ -54,11 +54,9 @@ namespace Mediapipe.Unity {
             set {
                 if (_webCamDevice is WebCamDevice valueOfWebCamDevice) {
                     if (value is WebCamDevice valueOfValue && valueOfValue.name == valueOfWebCamDevice.name) {
-                        // not changed
                         return;
                     }
                 } else if (value == null) {
-                    // not changed
                     return;
                 }
                 _webCamDevice = value;

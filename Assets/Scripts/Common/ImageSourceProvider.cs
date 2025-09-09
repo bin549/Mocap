@@ -1,7 +1,6 @@
 namespace Mediapipe.Unity.Sample {
     public static class ImageSourceProvider {
         private static WebCamSource _WebCamSource;
-        private static StaticImageSource _StaticImageSource;
         private static VideoSource _VideoSource;
 
         public static ImageSource ImageSource { get; private set; }
@@ -11,9 +10,6 @@ namespace Mediapipe.Unity.Sample {
                 if (ImageSource is WebCamSource) {
                     return ImageSourceType.WebCamera;
                 }
-                if (ImageSource is StaticImageSource) {
-                    return ImageSourceType.Image;
-                }
                 if (ImageSource is VideoSource) {
                     return ImageSourceType.Video;
                 }
@@ -21,10 +17,8 @@ namespace Mediapipe.Unity.Sample {
             }
         }
 
-        internal static void Initialize(WebCamSource webCamSource, StaticImageSource staticImageSource,
-            VideoSource videoSource) {
+        internal static void Initialize(WebCamSource webCamSource, VideoSource videoSource) {
             _WebCamSource = webCamSource;
-            _StaticImageSource = staticImageSource;
             _VideoSource = videoSource;
         }
 
@@ -32,10 +26,6 @@ namespace Mediapipe.Unity.Sample {
             switch (imageSourceType) {
                 case ImageSourceType.WebCamera: {
                     ImageSource = _WebCamSource;
-                    break;
-                }
-                case ImageSourceType.Image: {
-                    ImageSource = _StaticImageSource;
                     break;
                 }
                 case ImageSourceType.Video: {

@@ -48,14 +48,12 @@ namespace Mediapipe.Unity.Sample {
 
         protected Bootstrap FindBootstrap() {
             var bootstrapObj = GameObject.Find("Bootstrap");
-
             if (bootstrapObj == null) {
                 Debug.Log("Initializing the Bootstrap GameObject");
                 bootstrapObj = Instantiate(_bootstrapPrefab);
                 bootstrapObj.name = _BootstrapName;
                 DontDestroyOnLoad(bootstrapObj);
             }
-
             return bootstrapObj.GetComponent<Bootstrap>();
         }
     }

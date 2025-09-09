@@ -27,16 +27,12 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection {
             Debug.Log($"MinPosePresenceConfidence = {config.MinPosePresenceConfidence}");
             Debug.Log($"MinTrackingConfidence = {config.MinTrackingConfidence}");
             Debug.Log($"OutputSegmentationMasks = {config.OutputSegmentationMasks}");
-
             yield return AssetLoader.PrepareAssetAsync(config.ModelPath);
-
             var options = config.GetPoseLandmarkerOptions(
                 config.RunningMode == Tasks.Vision.Core.RunningMode.LIVE_STREAM ? OnPoseLandmarkDetectionOutput : null);
             taskApi = PoseLandmarker.CreateFromOptions(options, GpuManager.GpuResources);
             var imageSource = ImageSourceProvider.ImageSource;
-
             yield return imageSource.Play();
-
             if (!imageSource.isPrepared) {
                 Logger.LogError(TAG, "Failed to start ImageSource, exiting...");
                 yield break;
@@ -49,18 +45,14 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection {
             var transformationOptions = imageSource.GetTransformationOptions();
             var flipHorizontally = transformationOptions.flipHorizontally;
             var flipVertically = transformationOptions.flipVertically;
-
             var imageProcessingOptions = new Tasks.Vision.Core.ImageProcessingOptions(rotationDegrees: 0);
-
             AsyncGPUReadbackRequest req = default;
             var waitUntilReqDone = new WaitUntil(() => req.done);
             var waitForEndOfFrame = new WaitForEndOfFrame();
             var result = PoseLandmarkerResult.Alloc(options.numPoses, options.outputSegmentationMasks);
-
             var canUseGpuImage = SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3 &&
                                  GpuManager.GpuResources != null;
             using var glContext = canUseGpuImage ? GpuManager.GetGlContext() : null;
-
             while (true) {
                 if (isPaused) {
                     yield return new WaitWhile(() => isPaused);
