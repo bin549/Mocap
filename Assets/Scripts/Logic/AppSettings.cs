@@ -16,7 +16,7 @@ public class AppSettings : MonoBehaviour {
 
     private void Start() {
         if (bootstrap == null) {
-            bootstrap = FindObjectOfType<Bootstrap>();
+            bootstrap = FindObjectOfType<Bootstrap>(); 
         }
         if (bootstrap == null) {
             Debug.LogError("AppSettings: 找不到 Bootstrap 组件！");
