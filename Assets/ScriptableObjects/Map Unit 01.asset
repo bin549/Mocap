@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1050551a9f494d86a2b7f7d149884ee, type: 3}
+  m_Name: Map Unit 01
+  m_EditorClassIdentifier: 
+  map: {fileID: 5342126755314156493, guid: 9ebdf58bb9166437689fbf933f8322b3, type: 3}
+  sprite: {fileID: 21300000, guid: 175a9b689b565482db154ab1f159ec0e, type: 3}
+  skyMaterial: {fileID: 2100000, guid: 63c7f212f60aadc47945b935dc40e7c0, type: 2}
+  mapLight: {fileID: 4170759675852441549, guid: b5ec1b3c20f8d4a658cb29b11cac7402,
+    type: 3}
